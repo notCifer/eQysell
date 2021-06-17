@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+//###############################################################################//
 
 @Entity
 public class Usuario {
@@ -14,13 +15,17 @@ public class Usuario {
     private String email;
     private String senha;
 
+    //###############################################################################//
+
     public Usuario() {
     }
+    //###############################################################################//
 
     public Usuario(String email, String senha) {
         this.email = email;
         this.senha = senha;
     }
+    //###############################################################################//
 
     public Long getId() {
         return id;
