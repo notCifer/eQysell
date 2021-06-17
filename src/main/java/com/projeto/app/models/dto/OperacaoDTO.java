@@ -14,7 +14,7 @@ public class OperacaoDTO {
     //###############################################################################//
     //toDTO
 
-    public static OperacaoDTO converter(Operacao op)
+    public static OperacaoDTO toDTO(Operacao op)
     {
         OperacaoDTO dto = new OperacaoDTO();
         dto.setNome(op.getNome());
@@ -23,8 +23,8 @@ public class OperacaoDTO {
         return dto;
     }
 
-    public static List<OperacaoDTO> converter(List<Operacao> op){
-        return op.stream().map(x -> converter(x)).collect(Collectors.toList());
+    public static List<OperacaoDTO> toDTO(List<Operacao> op){
+        return op.stream().map(x -> toDTO(x)).collect(Collectors.toList());
     }
 
     //###############################################################################//
