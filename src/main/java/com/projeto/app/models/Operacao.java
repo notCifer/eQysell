@@ -1,21 +1,19 @@
 package com.projeto.app.models;
 //###############################################################################//
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
+import javax.persistence.*;
 //###############################################################################//
 
+@Entity
 public class Operacao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Notlank
     private String nome;
     private String razaosocial;
-    @NotNull
-    @NotNull @NotEmpty
+
+    @OneToMany
     private Locatario response;
     private long cnpj;
 
