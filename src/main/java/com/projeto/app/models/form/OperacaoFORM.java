@@ -1,8 +1,11 @@
 package com.projeto.app.models.form;
 
+import com.projeto.app.models.Locatario;
 import com.projeto.app.models.Operacao;
 import com.projeto.app.repositories.OperacaoRepository;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.persistence.OneToMany;
 //###############################################################################//
 
