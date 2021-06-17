@@ -1,6 +1,5 @@
 package com.projeto.app.models.dto;
 
-
 import com.projeto.app.models.Operacao;
 import java.util.stream.Collectors;
 import java.util.List;
@@ -11,23 +10,7 @@ public class OperacaoDTO {
     private String razaosocial;
     private long cnpj;
 
-    //###############################################################################//
-    //toDTO
-
-    public static OperacaoDTO toDTO(Operacao op)
-    {
-        OperacaoDTO dto = new OperacaoDTO();
-        dto.setNome(op.getNome());
-        dto.setRazaosocial(op.getRazaosocial());
-        dto.setCnpj(op.getCnpj());
-        return dto;
-    }
-
-    public static List<OperacaoDTO> toDTO(List<Operacao> op){
-        return op.stream().map(x -> toDTO(x)).collect(Collectors.toList());
-    }
-
-    //###############################################################################//
+    /* ___________________________GETTERS and SETTERS___________________________ */
     public String getNome() {
         return nome;
     }
@@ -50,5 +33,19 @@ public class OperacaoDTO {
 
     public void setCnpj(long cnpj) {
         this.cnpj = cnpj;
+    }
+
+    /* ___________________________METODO toDTO___________________________ */
+
+    public static OperacaoDTO toDTO(Operacao op) {
+        OperacaoDTO dto = new OperacaoDTO();
+        dto.setNome(op.getNome());
+        dto.setRazaosocial(op.getRazaosocial());
+        dto.setCnpj(op.getCnpj());
+        return dto;
+    }
+
+    public static List<OperacaoDTO> toDTO(List<Operacao> op) {
+        return op.stream().map(x -> toDTO(x)).collect(Collectors.toList());
     }
 }

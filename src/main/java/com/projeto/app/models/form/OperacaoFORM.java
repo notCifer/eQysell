@@ -3,32 +3,19 @@ package com.projeto.app.models.form;
 import com.projeto.app.models.Locatario;
 import com.projeto.app.models.Operacao;
 import com.projeto.app.repositories.OperacaoRepository;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.persistence.OneToMany;
-//###############################################################################//
 
 public class OperacaoFORM {
 
     @NotBlank
     private String nome;
-    private String razaosocial;
-
-    //Existe aqui? or @ManytoMany ?
-    //@OneToMany
-    @NotEmpty @NotNull
+    private String razaosocial; /* OPCIONAL */
+    @OneToOne
     private Locatario response;
-    private long cnpj;
+    private long cnpj; /* OPCIONAL */
 
-    //###############################################################################//
-    //toForm
-    public Operacao toForm(OperacaoRepository operacaoR){
-        Operacao operacao = new Operacao(nome, razaosocial, response, cnpj);
-        operacaoR.save(operacao);
-        return operacao;
-    }
-    //###############################################################################//
+    /* ___________________________GETTERS and SETTERS___________________________ */
     public String getNome() {
         return nome;
     }
@@ -59,5 +46,13 @@ public class OperacaoFORM {
 
     public void setCnpj(long cnpj) {
         this.cnpj = cnpj;
+    }
+
+    /* ___________________________TO FORM___________________________ */
+
+    public Operacao toForm(OperacaoRepository operacaoR) {
+        Operacao operacao = new Operacao(nome, razaosocial, response, cnpj);
+        operacaoR.save(operacao);
+        return operacao;
     }
 }

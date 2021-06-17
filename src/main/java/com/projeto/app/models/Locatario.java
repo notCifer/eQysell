@@ -8,69 +8,63 @@ import javax.persistence.Id;
 @Entity
 public class Locatario {
 
-    // INFORMAÇÕES PESSOAIS DO LOCÁTARIO
+    /* __________INFORMAÇÕES PESSOAIS DO LOCÁTARIO__________ */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private String nome;
-        private Long cpf;
-        private String endereco;
-        private String email;
-        private Long telefone;
+    private String nome;
+    private Long cpf;
+    private String endereco;
+    private String email;
+    private Long telefone;
 
-     // CONSTRUCTOR   
-        public Locatario(String nome, Long cpf, String endereco, String email, Long telefone) {
-            this.nome = nome;
-            this.cpf = cpf;
-            this.endereco = endereco;
-            this.email = email;
-            this.telefone = telefone;
-        }
-    // GET E SET
-        public String getNome() {
-            return nome;
-        }
+    /* ___________________________CONSTRUCTOR___________________________ */
+    public Locatario(String nome, Long cpf, String endereco, String email, Long telefone) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.endereco = endereco;
+        this.email = email;
+        this.telefone = telefone;
+    }
 
-        public void setNome(String nome) {
-            this.nome = nome;
-        }
+    /* ___________________________GETTERS and SETTERS ___________________________ */
+    public String getNome() {
+        return nome;
+    }
 
-        public Long getCpf() {
-            return cpf;
-        }
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-        public void setCpf(Long cpf) {
-            this.cpf = cpf;
-        }
+    public Long getCpf() {
+        return cpf;
+    }
 
-        public String getEndereco() {
-            return endereco;
-        }
+    public void setCpf(Long cpf) {
+        this.cpf = cpf;
+    }
 
-        public void setEndereco(String endereco) {
-            this.endereco = endereco;
-        }
+    public String getEndereco() {
+        return endereco;
+    }
 
-        public String getEmail() {
-            return email;
-        }
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
 
-        public void setEmail(String email) {
-            this.email = email;
-        }
+    public String getEmail() {
+        return email;
+    }
 
-        public Long getTelefone() {
-            return telefone;
-        }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-        public void setTelefone(Long telefone) {
-            this.telefone = telefone;
-        }
-    
+    public Long getTelefone() {
+        return telefone;
+    }
 
+    public void setTelefone(Long telefone) {
+        this.telefone = telefone;
+    }
 
-
-
-
-
-    
 }
