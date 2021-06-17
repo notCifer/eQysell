@@ -2,7 +2,6 @@ package com.projeto.app.models.form;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-
 import com.projeto.app.models.Usuario;
 import com.projeto.app.repositories.UsuarioRepository;
 
