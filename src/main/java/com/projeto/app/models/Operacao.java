@@ -11,7 +11,7 @@ public class Operacao {
     private String nome;
     private String razaosocial;
 
-    @OneToMany
+    @ManyToOne(cascade = CascadeType.ALL)
     private Locatario response;
     private long cnpj;
 
