@@ -1,7 +1,8 @@
 package com.projeto.app.models;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,17 +23,17 @@ public class Pessoa {
     private String complemento;
     private Long numero;
     private Long telefone;
-    private LocalDateTime dt_nascimento;
+    private LocalDate dt_nascimento;
     @Lob
     private Byte[] foto;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Usuario usuario;
 
     public Pessoa() {
     }
 
     public Pessoa(String nome, Long cpf, Long cep, String endereco, String complemento, Long numero, Long telefone,
-            LocalDateTime dt_nascimento, Usuario usuario) {
+            LocalDate dt_nascimento, Usuario usuario) {
         this.nome = nome;
         this.cpf = cpf;
         this.cep = cep;
@@ -42,6 +43,14 @@ public class Pessoa {
         this.telefone = telefone;
         this.dt_nascimento = dt_nascimento;
         this.usuario = usuario;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -88,6 +97,7 @@ public class Pessoa {
         return numero;
     }
 
+
     public void setNumero(Long numero) {
         this.numero = numero;
     }
@@ -100,11 +110,11 @@ public class Pessoa {
         this.telefone = telefone;
     }
 
-    public LocalDateTime getDt_nascimento() {
+    public LocalDate getDt_nascimento() {
         return dt_nascimento;
     }
 
-    public void setDt_nascimento(LocalDateTime dt_nascimento) {
+    public void setDt_nascimento(LocalDate dt_nascimento) {
         this.dt_nascimento = dt_nascimento;
     }
 
