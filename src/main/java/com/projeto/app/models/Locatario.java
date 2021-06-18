@@ -11,6 +11,7 @@ public class Locatario {
     /* __________INFORMAÇÕES PESSOAIS DO LOCÁTARIO__________ */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String nome;
     private Long cpf;
     private String endereco;
@@ -18,7 +19,8 @@ public class Locatario {
     private Long telefone;
 
     /* ___________________________CONSTRUCTOR___________________________ */
-    public Locatario(String nome, Long cpf, String endereco, String email, Long telefone) {
+    public Locatario(Long id, String nome, Long cpf, String endereco, String email, Long telefone) {
+        this.id = id;
         this.nome = nome;
         this.cpf = cpf;
         this.endereco = endereco;
@@ -27,8 +29,19 @@ public class Locatario {
     }
 
     /* ___________________________GETTERS and SETTERS ___________________________ */
+
+
+
     public String getNome() {
         return nome;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setNome(String nome) {

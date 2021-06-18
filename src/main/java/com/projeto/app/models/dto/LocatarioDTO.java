@@ -7,11 +7,22 @@ import com.projeto.app.models.Locatario;
 
 public class LocatarioDTO {
 
+    private Long id ;
     private String nome;
     private String email;
     private Long telefone;
 
     /* ___________________________GETTERS and SETTERS___________________________ */
+
+    public Long getId() {
+        return id;
+    }
+
+    
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -40,6 +51,7 @@ public class LocatarioDTO {
 
     public LocatarioDTO toDTO(Locatario locatario) {
         LocatarioDTO DTO = new LocatarioDTO();
+        DTO.setId(locatario.getId());
         DTO.setNome(locatario.getNome());
         DTO.setEmail(locatario.getEmail());
         DTO.setTelefone(locatario.getTelefone());
@@ -49,5 +61,7 @@ public class LocatarioDTO {
     public List<LocatarioDTO> toDTO(List<Locatario> locatarios) {
         return locatarios.stream().map(locatario -> toDTO(locatario)).collect(Collectors.toList());
     }
-
 }
+
+
+   
