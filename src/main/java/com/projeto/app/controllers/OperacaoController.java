@@ -28,10 +28,15 @@ public class OperacaoController {
 
     @GetMapping
     //@ApiOperation(value="Método de Listagem Completa")
-    public ResponseEntity<List<OperacaoDTO>> FindAll(){
-        List<Operacao> findList = OR.findAll();
-        OperacaoDTO dto = new OperacaoDTO();
-        return ResponseEntity.ok().body(dto.toDTO(findList));
+    public ResponseEntity<?> FindAll() {
+
+        List<Operacao> ops = OR.findAll();
+        OperacaoDTO DTO = new OperacaoDTO();
+        if (ops.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Lista está vazia");
+        }
+        return ResponseEntity.status(HttpStatus.FOUND).body(DTO.toDTO(ops));
+
     }
 
     @GetMapping("/{id}")
