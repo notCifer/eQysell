@@ -67,7 +67,15 @@ public class LocatarioController {
         URI uri = UriBuilder.path("/{id}").buildAndExpand(locatario.getId()).toUri();
         return ResponseEntity.created(uri).body(DTO.toDTO(locatario));
     }
-    
+
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> Delete(@PathVariable Long id) {
+        Usuario usuario = LocatarioR.getById(id);
+        LocatarioR.delete(usuario);
+        return ResponseEntity.status(HttpStatus.OK).body("Locatario de ID" + id + "\n Deletado com sucesso!");
+    }
+
     }
     
 
