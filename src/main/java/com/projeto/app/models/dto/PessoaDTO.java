@@ -1,9 +1,9 @@
 package com.projeto.app.models.dto;
 
-import java.time.LocalDateTime;
-
+import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 import com.projeto.app.models.Pessoa;
-import com.projeto.app.models.Usuario;
 
 public class PessoaDTO {
 
@@ -14,9 +14,9 @@ public class PessoaDTO {
     private String complemento;
     private Long numero;
     private Long telefone;
-    private LocalDateTime dt_nascimento;
+    private LocalDate dt_nascimento;
     private Byte[] foto;
-    private Usuario usuario;
+    private UsuarioDTO usuarioDTO;
 
     public String getNome() {
         return nome;
@@ -74,11 +74,11 @@ public class PessoaDTO {
         this.telefone = telefone;
     }
 
-    public LocalDateTime getDt_nascimento() {
+    public LocalDate getDt_nascimento() {
         return dt_nascimento;
     }
 
-    public void setDt_nascimento(LocalDateTime dt_nascimento) {
+    public void setDt_nascimento(LocalDate dt_nascimento) {
         this.dt_nascimento = dt_nascimento;
     }
 
@@ -90,16 +90,17 @@ public class PessoaDTO {
         this.foto = foto;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public UsuarioDTO getUsuarioDTO() {
+        return usuarioDTO;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setUsuarioDTO(UsuarioDTO usuarioDTO) {
+        this.usuarioDTO = usuarioDTO;
     }
 
     public PessoaDTO toDTO(Pessoa pessoa) {
         PessoaDTO DTO = new PessoaDTO();
+        UsuarioDTO DTO2 = new UsuarioDTO();
         DTO.setNome(pessoa.getNome());
         DTO.setCpf(pessoa.getCpf());
         DTO.setCep(pessoa.getCep());
@@ -108,9 +109,13 @@ public class PessoaDTO {
         DTO.setNumero(pessoa.getNumero());
         DTO.setTelefone(pessoa.getTelefone());
         DTO.setDt_nascimento(pessoa.getDt_nascimento());
-        DTO.setUsuario(pessoa.getUsuario());
+        DTO.setUsuarioDTO(DTO2.toDTO(pessoa.getUsuario()));
         DTO.setDt_nascimento(pessoa.getDt_nascimento());
         return DTO;
+    }
+
+    public List<PessoaDTO> toDTO(List<Pessoa> pessoas) {
+        return pessoas.stream().map(pessoa -> toDTO(pessoa)).collect(Collectors.toList());
     }
 
 }
