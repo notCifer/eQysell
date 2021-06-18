@@ -1,15 +1,15 @@
 package com.projeto.app.models.form;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
-
+import java.time.LocalDate;
 import javax.transaction.Transactional;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-
 import com.projeto.app.models.Pessoa;
 import com.projeto.app.models.Usuario;
 import com.projeto.app.repositories.PessoaRepository;
+import com.projeto.app.repositories.UsuarioRepository;
+
 import org.springframework.web.multipart.MultipartFile;
 
 public class PessoaFORM {
@@ -29,12 +29,10 @@ public class PessoaFORM {
     @NotNull
     private Long telefone;
     @NotNull
-    private LocalDateTime dt_nascimento;
-    @NotNull
+    private LocalDate dt_nascimento;
     private Byte[] foto;
-    @NotNull
-    private Usuario usuario;
-
+    private Long id_usuario;
+    
     public String getNome() {
         return nome;
     }
@@ -91,11 +89,11 @@ public class PessoaFORM {
         this.telefone = telefone;
     }
 
-    public LocalDateTime getDt_nascimento() {
+    public LocalDate getDt_nascimento() {
         return dt_nascimento;
     }
 
-    public void setDt_nascimento(LocalDateTime dt_nascimento) {
+    public void setDt_nascimento(LocalDate dt_nascimento) {
         this.dt_nascimento = dt_nascimento;
     }
 
@@ -107,18 +105,20 @@ public class PessoaFORM {
         this.foto = foto;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public Long getId_usuario() {
+        return id_usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setId_usuario(Long id_usuario) {
+        this.id_usuario = id_usuario;
     }
 
-    public Pessoa toFORM(PessoaRepository pessoaR) {
+    public Pessoa toFORM(PessoaRepository pessoaR, UsuarioRepository usuarioR) {
+        Usuario usuario = usuarioR.getById(id_usuario);
         Pessoa pessoa = new Pessoa(nome, cpf, cep, endereco, complemento, numero, telefone, dt_nascimento, usuario);
         pessoaR.save(pessoa);
         return pessoa;
+
     }
 
     @Transactional

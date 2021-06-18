@@ -2,7 +2,6 @@ package com.projeto.app.controllers;
 
 import java.net.URI;
 import java.util.List;
-
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import com.projeto.app.models.Usuario;
@@ -30,14 +29,12 @@ public class UsuarioController {
 
     @GetMapping
     public ResponseEntity<?> FindAll() {
-
         List<Usuario> usuarios = usuarioR.findAll();
         UsuarioDTO DTO = new UsuarioDTO();
         if (usuarios.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Lista está vazia");
         }
         return ResponseEntity.status(HttpStatus.FOUND).body(DTO.toDTO(usuarios));
-
     }
 
     @GetMapping("/{id}")
@@ -50,14 +47,18 @@ public class UsuarioController {
         } catch (EntityNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário não encontrado");
         }
-
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> DeleteByID(@PathVariable Long id) {
         Usuario usuario = usuarioR.getById(id);
-        usuarioR.delete(usuario);
-        return ResponseEntity.status(HttpStatus.OK).body("Usuario de ID" + id + "\n Deletado com sucesso!");
+        try {
+            usuarioR.delete(usuario);
+            return ResponseEntity.status(HttpStatus.OK).body("Usuario de ID" + id + "\n Deletado com sucesso!");
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário não encontrado");
+        }
+
     }
 
     @PostMapping
