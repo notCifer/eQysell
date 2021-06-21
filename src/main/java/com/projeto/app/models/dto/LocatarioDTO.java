@@ -2,7 +2,6 @@ package com.projeto.app.models.dto;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
 import com.projeto.app.models.Locatario;
 
 public class LocatarioDTO {
