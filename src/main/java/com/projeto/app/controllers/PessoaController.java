@@ -2,6 +2,8 @@ package com.projeto.app.controllers;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
+
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import javax.validation.ValidationException;
@@ -38,7 +40,7 @@ public class PessoaController {
         PessoaDTO DTO = new PessoaDTO();
         List<Pessoa> pessoa = pessoaR.findAll();
         if (pessoa.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Lista está vazia");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Lista Vazia");
         }
         return ResponseEntity.status(HttpStatus.FOUND).body(DTO.toDTO(pessoa));
     }
@@ -55,22 +57,24 @@ public class PessoaController {
 
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> DeleteByID(@PathVariable Long id) {
-        Pessoa pessoa = pessoaR.getById(id);
-        try {
-            pessoaR.delete(pessoa);
+
+        Optional<Pessoa> pessoa = pessoaR.findById(id);
+
+        if (pessoa.isPresent()) {
+            pessoaR.deleteById(id);
             return ResponseEntity.status(HttpStatus.OK).body("Pessoa de ID" + id + "\n Deletado com sucesso!");
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pessoa não encontrado");
         }
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pessoa não encontrada");
     }
 
     @PostMapping
     public ResponseEntity<?> Add(@RequestBody @Valid PessoaFORM FORM, UriComponentsBuilder uriBuilder) {
         PessoaDTO DTO = new PessoaDTO();
         try {
-            Pessoa pessoa = FORM.toFORM(pessoaR,usuarioR);
+            Pessoa pessoa = FORM.toFORM(pessoaR, usuarioR);
             URI uri = uriBuilder.path("/{id}").buildAndExpand(pessoa.getId()).toUri();
             return ResponseEntity.created(uri).body(DTO.toDTO(pessoa));
         } catch (ValidationException e) {

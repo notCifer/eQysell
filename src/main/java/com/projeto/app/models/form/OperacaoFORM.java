@@ -10,6 +10,7 @@ public class OperacaoFORM {
 
     @NotBlank
     private String nome;
+    @NotBlank
     private String razaosocial; /* OPCIONAL */
     @OneToOne
     private Locatario response;

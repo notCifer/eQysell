@@ -2,6 +2,7 @@ package com.projeto.app.controllers;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import com.projeto.app.models.Locatario;
@@ -21,7 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
-@RequestMapping(value = "/locatario")
+@RequestMapping("/locatario")
 public class LocatarioController {
 
     @Autowired
@@ -41,6 +42,7 @@ public class LocatarioController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> FindByID(@PathVariable Long id) {
+
         try {
             Locatario locatario = LocatarioR.getById(id);
             LocatarioDTO DTO = new LocatarioDTO();
@@ -50,21 +52,23 @@ public class LocatarioController {
         }
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> Delete(@PathVariable Long id) {
+        Optional<Locatario> locatario = LocatarioR.findById(id);
+        if (locatario.isPresent()) {
+            LocatarioR.deleteById(id);
+            return ResponseEntity.status(HttpStatus.OK).body("Locatario de ID" + id + "\n Deletado com sucesso!");
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Locatario não encontrado");
+    }
+
     /* __________POSTAR LOCATARIOS__________ */
     @PostMapping
-    public ResponseEntity<LocatarioDTO> cadastrar(@RequestBody @Valid LocatarioFORM form,
-            UriComponentsBuilder UriBuilder) {
+    public ResponseEntity<LocatarioDTO> cadastrar(@RequestBody @Valid LocatarioFORM form, UriComponentsBuilder UriBuilder) {
         Locatario locatario = form.toFORM(LocatarioR);
         LocatarioDTO DTO = new LocatarioDTO();
         URI uri = UriBuilder.path("/{id}").buildAndExpand(locatario.getId()).toUri();
         return ResponseEntity.created(uri).body(DTO.toDTO(locatario));
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> Delete(@PathVariable Long id) {
-        Locatario locatario = LocatarioR.getById(id);
-        LocatarioR.delete(locatario);
-        return ResponseEntity.status(HttpStatus.OK).body("Locatario de ID" + id + "\n Deletado com sucesso!");
     }
 
 }
