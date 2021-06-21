@@ -37,13 +37,11 @@ public class OperacaoController {
     @GetMapping
     public ResponseEntity<?> FindAll() {
         List<Operacao> findList = OR.findAll();
-
         if (findList.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Lista Vazia");
         }
         OperacaoDTO dto = new OperacaoDTO();
         return ResponseEntity.ok().body(dto.toDTO(findList));
-
     }
 
     @GetMapping("/{id}")
@@ -71,7 +69,7 @@ public class OperacaoController {
 
     @PostMapping
     // @ApiOperation(value="Cadastro de Operações")
-    public ResponseEntity<?> CadastreOperacao(@RequestBody @Valid OperacaoFORM OF, UriComponentsBuilder uri) {
+    public ResponseEntity<?> Add(@RequestBody @Valid OperacaoFORM OF, UriComponentsBuilder uri) {
         try {
             Operacao o = OF.toForm(OR);
             URI u = uri.path("/operacao/{id}").buildAndExpand(o.getId()).toUri();

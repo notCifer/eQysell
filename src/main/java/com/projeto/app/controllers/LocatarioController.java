@@ -64,7 +64,7 @@ public class LocatarioController {
 
     /* __________POSTAR LOCATARIOS__________ */
     @PostMapping
-    public ResponseEntity<LocatarioDTO> cadastrar(@RequestBody @Valid LocatarioFORM form, UriComponentsBuilder UriBuilder) {
+    public ResponseEntity<LocatarioDTO> Add(@RequestBody @Valid LocatarioFORM form, UriComponentsBuilder UriBuilder) {
         Locatario locatario = form.toFORM(LocatarioR);
         LocatarioDTO DTO = new LocatarioDTO();
         URI uri = UriBuilder.path("/{id}").buildAndExpand(locatario.getId()).toUri();

@@ -59,14 +59,12 @@ public class PessoaController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> DeleteByID(@PathVariable Long id) {
-
         Optional<Pessoa> pessoa = pessoaR.findById(id);
 
         if (pessoa.isPresent()) {
             pessoaR.deleteById(id);
             return ResponseEntity.status(HttpStatus.OK).body("Pessoa de ID" + id + "\n Deletado com sucesso!");
         }
-
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pessoa não encontrada");
     }
 
