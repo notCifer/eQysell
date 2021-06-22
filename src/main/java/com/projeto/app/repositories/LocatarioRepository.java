@@ -1,10 +1,10 @@
 package com.projeto.app.repositories;
 
-import com.projeto.app.models.Usuario;
+import com.projeto.app.models.Locatario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
+public interface LocatarioRepository extends JpaRepository<Locatario, Long> {
 
 }
