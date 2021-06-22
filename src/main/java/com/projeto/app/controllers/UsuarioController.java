@@ -2,6 +2,8 @@ package com.projeto.app.controllers;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
+
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import com.projeto.app.models.Usuario;
@@ -32,7 +34,7 @@ public class UsuarioController {
         List<Usuario> usuarios = usuarioR.findAll();
         UsuarioDTO DTO = new UsuarioDTO();
         if (usuarios.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Lista está vazia");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Lista Vazia");
         }
         return ResponseEntity.status(HttpStatus.FOUND).body(DTO.toDTO(usuarios));
     }
@@ -51,13 +53,12 @@ public class UsuarioController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> DeleteByID(@PathVariable Long id) {
-        Usuario usuario = usuarioR.getById(id);
-        try {
-            usuarioR.delete(usuario);
+        Optional<Usuario> usuario = usuarioR.findById(id);
+        if (usuario.isPresent()) {
+            usuarioR.deleteById(id);
             return ResponseEntity.status(HttpStatus.OK).body("Usuario de ID" + id + "\n Deletado com sucesso!");
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário não encontrado");
         }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário não encontrado");
 
     }
 

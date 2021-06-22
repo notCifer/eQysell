@@ -37,7 +37,7 @@ public class OperacaoDTO {
 
     /* ___________________________METODO toDTO___________________________ */
 
-    public static OperacaoDTO toDTO(Operacao op) {
+    public OperacaoDTO toDTO(Operacao op) {
         OperacaoDTO dto = new OperacaoDTO();
         dto.setNome(op.getNome());
         dto.setRazaosocial(op.getRazaosocial());
@@ -45,7 +45,7 @@ public class OperacaoDTO {
         return dto;
     }
 
-    public static List<OperacaoDTO> toDTO(List<Operacao> op) {
+    public List<OperacaoDTO> toDTO(List<Operacao> op) {
         return op.stream().map(x -> toDTO(x)).collect(Collectors.toList());
     }
 }

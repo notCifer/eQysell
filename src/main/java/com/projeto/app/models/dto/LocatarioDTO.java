@@ -2,7 +2,6 @@ package com.projeto.app.models.dto;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
 import com.projeto.app.models.Locatario;
 
 public class LocatarioDTO {
@@ -18,7 +17,6 @@ public class LocatarioDTO {
         return id;
     }
 
-    
     public void setId(Long id) {
         this.id = id;
     }
