@@ -9,34 +9,34 @@ import com.projeto.app.models.gestao.Valor;
 public class FinanceiroFORM {
 
     private Dados seg_limpeza;
-    // @NotNull
+
     private Dados sanepar;
-    // @NotNull
-    // private Double mat_limpeza;
-    // @NotNull
+
     private Dados copel;
-    // @NotNull
-    // private Double marketing;
-    // @NotNull
+
     private Dados cont_praga;
-    // @NotNull
-    // private Double honorario;
-    // @NotNull
+
     private Dados entretenimento;
-    // @NotNull
-    // private Double coleta_lixo;
-    // @NotNull
-    // private Double internet;
-    // @NotNull
+
     private Dados mat_expediente;
-    // @NotNull
-    // private Double manutencao;
-    // @NotNull
+
     private Dados impostos;
-    // @NotNull
-    // private Double locacao;
-    // @NotNull
+
     private Dados seguro;
+
+    private Dados mat_limpeza;
+
+    private Dados marketing;
+
+    private Dados honorario;
+
+    private Dados coleta_lixo;
+
+    private Dados internet;
+
+    private Dados manutencao;
+
+    private Dados locacao;
 
     public Dados getSeg_limpeza() {
         return seg_limpeza;
@@ -135,6 +135,92 @@ public class FinanceiroFORM {
         }
     }
 
+    public Dados getMat_Limpeza () {
+        return mat_limpeza;
+    }
+
+    public void setMat_Limpeza(Dados mat_limpeza) {
+        Descricao descricao;
+        descricao = Descricao.MAT_LIMPEZA;
+        if (mat_limpeza.getEscolha().equals(descricao)) {
+            this.mat_limpeza = mat_limpeza;
+        }
+    }
+
+    public Dados getMarketing () {
+        return marketing;
+    }
+
+    public void setMarketing(Dados marketing) {
+        Descricao descricao;
+        descricao = Descricao.MARKETING;
+        if (marketing.getEscolha().equals(descricao)) {
+            this.marketing = marketing;
+        }
+    }
+
+    public Dados getHonorario() {
+        return honorario;
+    }
+
+    public void setHonorario(Dados honorario) {
+        Descricao descricao;
+        descricao = Descricao.HONORARIOS;
+        if (honorario.getEscolha().equals(descricao)) {
+            this.honorario = honorario;
+        }
+    }
+
+    public Dados getColeta_lixo() {
+        return coleta_lixo;
+    }
+
+    public void setColeta_lixo(Dados coleta_lixo) {
+        Descricao descricao;
+        descricao = Descricao.COLETA_LIXO;
+        if (coleta_lixo.getEscolha().equals(descricao)) {
+            this.coleta_lixo= coleta_lixo;
+        }
+    }
+
+    public Dados getInternet() {
+        return internet;
+    }
+
+    public void setInternet(Dados internet) {
+        Descricao descricao;
+        descricao = Descricao.INTERNET;
+        if (internet.getEscolha().equals(descricao)) {
+            this.internet= internet;
+        }
+    }
+
+    public Dados getManutencao() {
+        return manutencao;
+    }
+
+    public void setManutencao(Dados manutencao) {
+        Descricao descricao;
+        descricao = Descricao.MANUTENÇÃO;
+        if (manutencao.getEscolha().equals(descricao)) {
+            this.manutencao = manutencao;
+        }
+    }
+
+    public Dados getLocacao() {
+        return locacao;
+    }
+
+    public void setLocacao(Dados locacao) {
+        Descricao descricao;
+        descricao = Descricao.MANUTENÇÃO;
+        if (locacao.getEscolha().equals(descricao)) {
+            this.locacao = locacao;
+        }
+    }
+
+
+
     public Double mostrar() {
         Double SEG_LIMPEZA = Somar(seg_limpeza);
         Double SANEPAR = Somar(sanepar);
@@ -144,7 +230,14 @@ public class FinanceiroFORM {
         Double MAT_EXPEDIENTE = Somar(mat_expediente);
         Double IMPOSTOS = Somar(impostos);
         Double SEGURO = Somar(seguro);
-        Double total = SEG_LIMPEZA + SANEPAR + COPEL + CONT_PRAGA + ENTRETENIMENTO + MAT_EXPEDIENTE + IMPOSTOS + SEGURO;
+        Double MAT_LIMPEZA = Somar(mat_limpeza);
+        Double MARKETING = Somar(marketing);
+        Double HONORARIO = Somar(honorario);
+        Double COLETA_LIXO = Somar(coleta_lixo);
+        Double INTERNET = Somar(internet);
+        Double MANUTENCAO = Somar(manutencao);
+        Double LOCACAO = Somar(locacao);
+        Double total = SEG_LIMPEZA + SANEPAR + COPEL + CONT_PRAGA + ENTRETENIMENTO + MAT_EXPEDIENTE + IMPOSTOS + SEGURO + MAT_LIMPEZA + MARKETING + HONORARIO + COLETA_LIXO + INTERNET + MANUTENCAO + LOCACAO;
         return total;
     }
 
