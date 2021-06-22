@@ -14,29 +14,29 @@ public class FinanceiroFORM {
     // @NotNull
     // private Double mat_limpeza;
     // @NotNull
-    // private Double copel;
+    private Dados copel;
     // @NotNull
     // private Double marketing;
     // @NotNull
-    // private Double cont_praga;
+    private Dados cont_praga;
     // @NotNull
     // private Double honorario;
     // @NotNull
-    // private Double entreterimento;
+    private Dados entretenimento;
     // @NotNull
     // private Double coleta_lixo;
     // @NotNull
     // private Double internet;
     // @NotNull
-    // private Double mat_expidiente;
+    private Dados mat_expediente;
     // @NotNull
     // private Double manutencao;
     // @NotNull
-    // private Double impostos;
+    private Dados impostos;
     // @NotNull
     // private Double locacao;
     // @NotNull
-    // private Double seguro;
+    private Dados seguro;
 
     public Dados getSeg_limpeza() {
         return seg_limpeza;
@@ -63,12 +63,91 @@ public class FinanceiroFORM {
         }     
     }
 
+    public Dados getCopel() {
+        return copel;
+    }
+
+    public void setCopel(Dados copel) {
+        Descricao descricao;
+        descricao = Descricao.COPEL;
+        if (copel.getEscolha().equals(descricao)){
+            this.copel = copel;
+        }
+    }
+
+    public Dados getCont_praga() {
+        return cont_praga;
+    }
+
+    public void setCont_praga(Dados cont_praga) {
+        Descricao descricao;
+        descricao = Descricao.CONT_PRAGA;
+        if(cont_praga.getEscolha().equals(descricao)) {
+            this.cont_praga = cont_praga;
+        }
+    }
+
+    public Dados getEntretenimento() {
+        return entretenimento;
+    }
+
+    public void setEntretenimento(Dados entretenimento) {
+        Descricao descricao;
+        descricao = Descricao.ENTRETENIMENTO;
+        if (entretenimento.getEscolha().equals(descricao)) {
+            this.entretenimento = entretenimento;
+        }
+    }
+
+    public Dados getMat_expediente() {
+        return mat_expediente;
+    }
+
+    public void setMat_expediente(Dados mat_expediente) {
+        Descricao descricao;
+        descricao = Descricao.MAT_EXPEDIENTE;
+        if (mat_expediente.getEscolha().equals(descricao)){
+        this.mat_expediente = mat_expediente;
+        }
+    }
+
+    public Dados getImpostos() {
+        return impostos;
+    }
+
+    public void setImpostos(Dados impostos) {
+        Descricao descricao;
+        descricao = Descricao.IMPOSTOS;
+        if (impostos.getEscolha().equals(descricao)) {
+            this.impostos = impostos;
+        }
+    }
+
+    public Dados getSeguro() {
+        return seguro;
+    }
+
+    public void setSeguro(Dados seguro) {
+        Descricao descricao;
+        descricao = Descricao.SEGURO;
+        if (seguro.getEscolha().equals(descricao)) {
+            this.seguro = seguro;
+        }
+    }
+
     public Double mostrar() {
         Double SEG_LIMPEZA = Somar(seg_limpeza);
         Double SANEPAR = Somar(sanepar);
-        Double total = SEG_LIMPEZA + SANEPAR;
+        Double COPEL = Somar(copel);
+        Double CONT_PRAGA = Somar(cont_praga);
+        Double ENTRETENIMENTO = Somar(entretenimento);
+        Double MAT_EXPEDIENTE = Somar(mat_expediente);
+        Double IMPOSTOS = Somar(impostos);
+        Double SEGURO = Somar(seguro);
+        Double total = SEG_LIMPEZA + SANEPAR + COPEL + CONT_PRAGA + ENTRETENIMENTO + MAT_EXPEDIENTE + IMPOSTOS + SEGURO;
         return total;
     }
+
 
     public Double Somar(Dados dados){
         List<Valor> valores = dados.getValor();
