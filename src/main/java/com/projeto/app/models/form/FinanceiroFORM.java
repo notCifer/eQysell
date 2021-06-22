@@ -2,170 +2,82 @@ package com.projeto.app.models.form;
 
 import java.util.List;
 
-import javax.validation.constraints.NotNull;
-
-import com.projeto.app.models.Financeiro;
-import com.projeto.app.repositories.FinanceiroRepository;
+import com.projeto.app.models.gestao.Dados;
+import com.projeto.app.models.gestao.Descricao;
+import com.projeto.app.models.gestao.Valor;
 
 public class FinanceiroFORM {
+  
+    private Dados seg_limpeza;
+    // @NotNull
+    private Dados sanepar;
+    // @NotNull
+    // private Double mat_limpeza;
+    // @NotNull
+    // private Double copel;
+    // @NotNull
+    // private Double marketing;
+    // @NotNull
+    // private Double cont_praga;
+    // @NotNull
+    // private Double honorario;
+    // @NotNull
+    // private Double entreterimento;
+    // @NotNull
+    // private Double coleta_lixo;
+    // @NotNull
+    // private Double internet;
+    // @NotNull
+    // private Double mat_expidiente;
+    // @NotNull
+    // private Double manutencao;
+    // @NotNull
+    // private Double impostos;
+    // @NotNull
+    // private Double locacao;
+    // @NotNull
+    // private Double seguro;
 
-    @NotNull
-    private List<Double> seg_limpeza;
-    @NotNull
-    private List<Double> sanepar;
-    @NotNull
-    private List<Double> mat_limpeza;
-    @NotNull
-    private List<Double> copel;
-    @NotNull
-    private List<Double> marketing;
-    @NotNull
-    private List<Double> cont_praga;
-    @NotNull
-    private List<Double> honorario;
-    @NotNull
-    private List<Double> entreterimento;
-    @NotNull
-    private List<Double> coleta_lixo;
-    @NotNull
-    private List<Double> internet;
-    @NotNull
-    private List<Double> mat_expidiente;
-    @NotNull
-    private List<Double> manutencao;
-    @NotNull
-    private List<Double> impostos;
-    @NotNull
-    private List<Double> locacao;
-    @NotNull
-    private List<Double> seguro;
-
-    public List<Double> getSeg_limpeza() {
+    public Dados getSeg_limpeza() {
         return seg_limpeza;
     }
 
-    public void setSeg_limpeza(List<Double> seg_limpeza) {
-        this.seg_limpeza = seg_limpeza;
+    public void setSeg_limpeza(Dados seg_limpeza) {
+        Descricao descricao;
+        descricao = Descricao.SEG_LIMPEZA;
+        if (seg_limpeza.getEscolha().equals(descricao)) {
+            this.seg_limpeza = seg_limpeza;
+        }
     }
 
-    public List<Double> getSanepar() {
+
+    public Dados getSanepar() {
         return sanepar;
     }
 
-    public void setSanepar(List<Double> sanepar) {
-        this.sanepar = sanepar;
+    public void setSanepar(Dados sanepar) {
+        Descricao descricao;
+        descricao = Descricao.SANEPAR;
+        if (sanepar.getEscolha().equals(descricao)) {
+            this.sanepar = sanepar;
+        }     
     }
 
-    public List<Double> getMat_limpeza() {
-        return mat_limpeza;
+    public Double mostrar() {
+        Double SEG_LIMPEZA = Somar(seg_limpeza);
+        Double SANEPAR = Somar(sanepar);
+        Double total = SEG_LIMPEZA + SANEPAR;
+        return total;
     }
 
-    public void setMat_limpeza(List<Double> mat_limpeza) {
-        this.mat_limpeza = mat_limpeza;
-    }
-
-    public List<Double> getCopel() {
-        return copel;
-    }
-
-    public void setCopel(List<Double> copel) {
-        this.copel = copel;
-    }
-
-    public List<Double> getMarketing() {
-        return marketing;
-    }
-
-    public void setMarketing(List<Double> marketing) {
-        this.marketing = marketing;
-    }
-
-    public List<Double> getCont_praga() {
-        return cont_praga;
-    }
-
-    public void setCont_praga(List<Double> cont_praga) {
-        this.cont_praga = cont_praga;
-    }
-
-    public List<Double> getHonorario() {
-        return honorario;
-    }
-
-    public void setHonorario(List<Double> honorario) {
-        this.honorario = honorario;
-    }
-
-    public List<Double> getEntreterimento() {
-        return entreterimento;
-    }
-
-    public void setEntreterimento(List<Double> entreterimento) {
-        this.entreterimento = entreterimento;
-    }
-
-    public List<Double> getColeta_lixo() {
-        return coleta_lixo;
-    }
-
-    public void setColeta_lixo(List<Double> coleta_lixo) {
-        this.coleta_lixo = coleta_lixo;
-    }
-
-    public List<Double> getInternet() {
-        return internet;
-    }
-
-    public void setInternet(List<Double> internet) {
-        this.internet = internet;
-    }
-
-    public List<Double> getMat_expidiente() {
-        return mat_expidiente;
-    }
-
-    public void setMat_expidiente(List<Double> mat_expidiente) {
-        this.mat_expidiente = mat_expidiente;
-    }
-
-    public List<Double> getManutencao() {
-        return manutencao;
-    }
-
-    public void setManutencao(List<Double> manutencao) {
-        this.manutencao = manutencao;
-    }
-
-    public List<Double> getImpostos() {
-        return impostos;
-    }
-
-    public void setImpostos(List<Double> impostos) {
-        this.impostos = impostos;
-    }
-
-    public List<Double> getLocacao() {
-        return locacao;
-    }
-
-    public void setLocacao(List<Double> locacao) {
-        this.locacao = locacao;
-    }
-
-    public List<Double> getSeguro() {
-        return seguro;
-    }
-
-    public void setSeguro(List<Double> seguro) {
-        this.seguro = seguro;
-    }
-
-    public Financeiro toFORM(FinanceiroRepository financeiroR) {
-        Financeiro financeiro = new Financeiro(seg_limpeza, sanepar, mat_limpeza, copel, marketing, cont_praga,
-                honorario, entreterimento, coleta_lixo, internet, mat_expidiente, manutencao, impostos, locacao,
-                seguro);
-        financeiroR.save(financeiro);
-        return financeiro;
+    public Double Somar(Dados dados){
+        List<Valor> valores = dados.getValor();
+        Double total = 0.0;
+        for (Valor valor : valores) {
+            total += valor.getCampo();
+        }
+        System.out.println(total);
+        return total;
     }
 
 }

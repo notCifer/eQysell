@@ -1,8 +1,6 @@
 package com.projeto.app.models.dto;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import com.projeto.app.models.Financeiro;
 
 public class FinanceiroDTO {
 
@@ -142,27 +140,27 @@ public class FinanceiroDTO {
         this.seguro = seguro;
     }
 
-    public FinanceiroDTO toDTO(Financeiro financeiro) {
-        FinanceiroDTO DTO = new FinanceiroDTO();
-        DTO.setSeg_limpeza(financeiro.getSeglimpeza());
-        DTO.setSanepar(financeiro.getSanepar());
-        DTO.setMat_limpeza(financeiro.getMatlimpeza());
-        DTO.setCopel(financeiro.getCopel());
-        DTO.setMarketing(financeiro.getMarketing());
-        DTO.setCont_praga(financeiro.getContpraga());
-        DTO.setHonorario(financeiro.getHonorario());
-        DTO.setEntreterimento(financeiro.getEntreterimento());
-        DTO.setColeta_lixo(financeiro.getColeta());
-        DTO.setInternet(financeiro.getInternet());
-        DTO.setMat_expidiente(financeiro.getMatexpidiente());
-        DTO.setManutencao(financeiro.getManutencao());
-        DTO.setImpostos(financeiro.getImpostos());
-        DTO.setLocacao(financeiro.getLocacao());
-        DTO.setSeguro(financeiro.getSeguro());
-        return DTO;
-    }
+    // public FinanceiroDTO toDTO(Financeiro financeiro) {
+    //     FinanceiroDTO DTO = new FinanceiroDTO();
+    //     DTO.setSeg_limpeza(financeiro.getSeglimpeza());
+    //     DTO.setSanepar(financeiro.getSanepar());
+    //     DTO.setMat_limpeza(financeiro.getMatlimpeza());
+    //     DTO.setCopel(financeiro.getCopel());
+    //     DTO.setMarketing(financeiro.getMarketing());
+    //     DTO.setCont_praga(financeiro.getContpraga());
+    //     DTO.setHonorario(financeiro.getHonorario());
+    //     DTO.setEntreterimento(financeiro.getEntreterimento());
+    //     DTO.setColeta_lixo(financeiro.getColeta());
+    //     DTO.setInternet(financeiro.getInternet());
+    //     DTO.setMat_expidiente(financeiro.getMatexpidiente());
+    //     DTO.setManutencao(financeiro.getManutencao());
+    //     DTO.setImpostos(financeiro.getImpostos());
+    //     DTO.setLocacao(financeiro.getLocacao());
+    //     DTO.setSeguro(financeiro.getSeguro());
+    //     return DTO;
+    // }
 
-    public List<FinanceiroDTO> toDTO(List<Financeiro> financeiros) {
-        return financeiros.stream().map(financeiro -> toDTO(financeiro)).collect(Collectors.toList());
-    }
+    // public List<FinanceiroDTO> toDTO(List<Financeiro> financeiros) {
+    //     return financeiros.stream().map(financeiro -> toDTO(financeiro)).collect(Collectors.toList());
+    // }
 }
