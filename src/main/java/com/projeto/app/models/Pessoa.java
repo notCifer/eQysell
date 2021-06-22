@@ -1,7 +1,6 @@
 package com.projeto.app.models;
 
 import java.time.LocalDate;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +13,7 @@ import javax.persistence.OneToOne;
 public class Pessoa {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
     private Long cpf;
@@ -96,7 +95,6 @@ public class Pessoa {
     public Long getNumero() {
         return numero;
     }
-
 
     public void setNumero(Long numero) {
         this.numero = numero;

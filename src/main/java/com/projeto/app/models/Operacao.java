@@ -20,14 +20,14 @@ public class Operacao {
     public Operacao() {
     }
 
+    /* ___________________________GETTERS and SETTERS___________________________ */
+
     public Operacao(String nome, String razaosocial, Locatario response, long cnpj) {
         this.nome = nome;
         this.razaosocial = razaosocial;
         this.response = response;
         this.cnpj = cnpj;
     }
-
-    /* ___________________________GETTERS and SETTERS___________________________ */
 
     public Long getId() {
         return id;

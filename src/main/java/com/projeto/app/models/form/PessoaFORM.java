@@ -9,7 +9,6 @@ import com.projeto.app.models.Pessoa;
 import com.projeto.app.models.Usuario;
 import com.projeto.app.repositories.PessoaRepository;
 import com.projeto.app.repositories.UsuarioRepository;
-
 import org.springframework.web.multipart.MultipartFile;
 
 public class PessoaFORM {
@@ -32,7 +31,7 @@ public class PessoaFORM {
     private LocalDate dt_nascimento;
     private Byte[] foto;
     private Long id_usuario;
-    
+
     public String getNome() {
         return nome;
     }
