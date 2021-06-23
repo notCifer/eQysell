@@ -14,7 +14,7 @@ public class Dados {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private Descricao escolha; 
+    private TipoEnum escolha; 
     @OneToMany
     @JoinColumn(name = "dados_id")
     private List<Valor> valor;
@@ -25,10 +25,10 @@ public class Dados {
     public void setId(Long id) {
         this.id = id;
     }
-    public Descricao getEscolha() {
+    public TipoEnum getEscolha() {
         return escolha;
     }
-    public void setEscolha(Descricao escolha) {
+    public void setEscolha(TipoEnum escolha) {
         this.escolha = escolha;
     }
     public List<Valor> getValor() {
