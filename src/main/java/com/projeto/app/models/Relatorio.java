@@ -26,10 +26,8 @@ public class Relatorio {
     private Double locacao;
     private Double seguro;
 
-
     public Relatorio() {
     }
-
 
     public Relatorio(Double seg_limpeza, Double sanepar, Double mat_limpeza, Double copel, Double marketiing,
             Double cont_praga, Double honorario, Double entreterimento, Double coleta_lixo, Double internet,
@@ -51,120 +49,132 @@ public class Relatorio {
         this.seguro = seguro;
     }
 
-
     public Long getId() {
         return id;
     }
-
 
     public void setId(Long id) {
         this.id = id;
     }
 
+    public Double getSeg_limpeza() {
+        return seg_limpeza;
+    }
+
+    public void setSeg_limpeza(Double seg_limpeza) {
+        this.seg_limpeza = seg_limpeza;
+    }
+
+    public Double getSanepar() {
+        return sanepar;
+    }
+
+    public void setSanepar(Double sanepar) {
+        this.sanepar = sanepar;
+    }
+
+    public Double getMat_limpeza() {
+        return mat_limpeza;
+    }
+
+    public void setMat_limpeza(Double mat_limpeza) {
+        this.mat_limpeza = mat_limpeza;
+    }
+
+    public Double getCopel() {
+        return copel;
+    }
+
+    public void setCopel(Double copel) {
+        this.copel = copel;
+    }
+
+    public Double getMarketing() {
+        return marketing;
+    }
+
+    public void setMarketing(Double marketing) {
+        this.marketing = marketing;
+    }
+
+    public Double getCont_praga() {
+        return cont_praga;
+    }
+
+    public void setCont_praga(Double cont_praga) {
+        this.cont_praga = cont_praga;
+    }
+
+    public Double getHonorario() {
+        return honorario;
+    }
+
+    public void setHonorario(Double honorario) {
+        this.honorario = honorario;
+    }
+
+    public Double getEntreterimento() {
+        return entreterimento;
+    }
+
+    public void setEntreterimento(Double entreterimento) {
+        this.entreterimento = entreterimento;
+    }
+
+    public Double getColeta_lixo() {
+        return coleta_lixo;
+    }
+
+    public void setColeta_lixo(Double coleta_lixo) {
+        this.coleta_lixo = coleta_lixo;
+    }
+
+    public Double getInternet() {
+        return internet;
+    }
+
+    public void setInternet(Double internet) {
+        this.internet = internet;
+    }
+
+    public Double getMat_expediente() {
+        return mat_expediente;
+    }
+
+    public void setMat_expediente(Double mat_expediente) {
+        this.mat_expediente = mat_expediente;
+    }
+
+    public Double getManutencao() {
+        return manutencao;
+    }
+
+    public void setManutencao(Double manutencao) {
+        this.manutencao = manutencao;
+    }
+
+    public Double getImpostos() {
+        return impostos;
+    }
+
+    public void setImpostos(Double impostos) {
+        this.impostos = impostos;
+    }
 
     public Double getLocacao() {
         return locacao;
     }
 
-
     public void setLocacao(Double locacao) {
         this.locacao = locacao;
     }
 
-
-    public Double getSeg_limpeza() {
-        return seg_limpeza;
-    }
-    public void setSeg_limpeza(Double seg_limpeza) {
-        this.seg_limpeza = seg_limpeza;
-    }
-    public Double getSanepar() {
-        return sanepar;
-    }
-    public void setSanepar(Double sanepar) {
-        this.sanepar = sanepar;
-    }
-    public Double getMat_limpeza() {
-        return mat_limpeza;
-    }
-    public void setMat_limpeza(Double mat_limpeza) {
-        this.mat_limpeza = mat_limpeza;
-    }
-    public Double getCopel() {
-        return copel;
-    }
-    public void setCopel(Double copel) {
-        this.copel = copel;
-    }
-    public Double getMarketiing() {
-        return marketing;
-    }
-    public void setMarketiing(Double marketiing) {
-        this.marketing = marketiing;
-    }
-    public Double getCont_praga() {
-        return cont_praga;
-    }
-    public void setCont_praga(Double cont_praga) {
-        this.cont_praga = cont_praga;
-    }
-    public Double getHonorario() {
-        return honorario;
-    }
-    public void setHonorario(Double honorario) {
-        this.honorario = honorario;
-    }
-    public Double getEntreterimento() {
-        return entreterimento;
-    }
-    public void setEntreterimento(Double entreterimento) {
-        this.entreterimento = entreterimento;
-    }
-    public Double getColeta_lixo() {
-        return coleta_lixo;
-    }
-    public void setColeta_lixo(Double coleta_lixo) {
-        this.coleta_lixo = coleta_lixo;
-    }
-    public Double getInternet() {
-        return internet;
-    }
-    public void setInternet(Double internet) {
-        this.internet = internet;
-    }
-    public Double getMat_expediente() {
-        return mat_expediente;
-    }
-    public void setMat_expediente(Double mat_expediente) {
-        this.mat_expediente = mat_expediente;
-    }
-    public Double getManutencao() {
-        return manutencao;
-    }
-    public void setManutencao(Double manutencao) {
-        this.manutencao = manutencao;
-    }
-    public Double getImpostos() {
-        return impostos;
-    }
-    public void setImpostos(Double impostos) {
-        this.impostos = impostos;
-    }
-    public Double getLocação() {
-        return locacao;
-    }
-    public void setLocação(Double locação) {
-        this.locacao = locação;
-    }
     public Double getSeguro() {
         return seguro;
     }
+
     public void setSeguro(Double seguro) {
         this.seguro = seguro;
     }
 
-
-    
-
-    
 }
