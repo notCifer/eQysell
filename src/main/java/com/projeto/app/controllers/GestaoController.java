@@ -5,7 +5,6 @@ import com.projeto.app.models.Gestao;
 import com.projeto.app.models.Relatorio;
 import com.projeto.app.models.dto.GestaoDTO;
 import com.projeto.app.models.form.GestaoFORM;
-import com.projeto.app.models.gestao.GerarRelatorio;
 import com.projeto.app.models.gestao.TipoEnum;
 import com.projeto.app.repositories.GestaoRepository;
 import com.projeto.app.repositories.RelatorioRepository;
@@ -26,9 +25,6 @@ public class GestaoController {
     private Calcular calc;
 
     @Autowired
-    private GerarRelatorio gRelatorio;
-
-    @Autowired
     private RelatorioRepository relatorioR;
 
 
@@ -43,7 +39,7 @@ public class GestaoController {
     public ResponseEntity<?> Total(@PathVariable("mes") Long mes){
         Relatorio relatorio = new Relatorio();
         for (int tipo = 0; tipo < TipoEnum.values().length; tipo++) {
-            relatorio = gRelatorio.inserirDados(gestaoR, calc, tipo, mes,relatorio);
+            relatorio = calc.inserirDados(gestaoR, tipo, mes,relatorio);
         }
         relatorioR.save(relatorio);    
         return ResponseEntity.ok().body(relatorio);
