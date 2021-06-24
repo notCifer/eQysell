@@ -1,4 +1,4 @@
-package com.projeto.app.models.gestao;
+package com.projeto.app.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -6,45 +6,43 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Financeiro {
-
+public class Relatorio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Double seglimpeza;
+    private Double seg_limpeza;
     private Double sanepar;
-    private Double matlimpeza;
+    private Double mat_limpeza;
     private Double copel;
     private Double marketing;
-    private Double contpraga;
+    private Double cont_praga;
     private Double honorario;
     private Double entreterimento;
-    private Double coleta;
+    private Double coleta_lixo;
     private Double internet;
-    private Double matexpidiente;
+    private Double mat_expediente;
     private Double manutencao;
     private Double impostos;
     private Double locacao;
     private Double seguro;
 
-    public Financeiro() {
-
+    public Relatorio() {
     }
 
-    public Financeiro(Double seglimpeza, Double sanepar, Double matlimpeza, Double copel, Double marketing,
-            Double contpraga, Double honorario, Double entreterimento, Double coleta, Double internet,
-            Double matexpidiente, Double manutencao, Double impostos, Double locacao, Double seguro) {
-        this.seglimpeza = seglimpeza;
+    public Relatorio(Double seg_limpeza, Double sanepar, Double mat_limpeza, Double copel, Double marketiing,
+            Double cont_praga, Double honorario, Double entreterimento, Double coleta_lixo, Double internet,
+            Double mat_expediente, Double manutencao, Double impostos, Double locacao, Double seguro) {
+        this.seg_limpeza = seg_limpeza;
         this.sanepar = sanepar;
-        this.matlimpeza = matlimpeza;
+        this.mat_limpeza = mat_limpeza;
         this.copel = copel;
-        this.marketing = marketing;
-        this.contpraga = contpraga;
+        this.marketing = marketiing;
+        this.cont_praga = cont_praga;
         this.honorario = honorario;
         this.entreterimento = entreterimento;
-        this.coleta = coleta;
+        this.coleta_lixo = coleta_lixo;
         this.internet = internet;
-        this.matexpidiente = matexpidiente;
+        this.mat_expediente = mat_expediente;
         this.manutencao = manutencao;
         this.impostos = impostos;
         this.locacao = locacao;
@@ -59,12 +57,12 @@ public class Financeiro {
         this.id = id;
     }
 
-    public Double getSeglimpeza() {
-        return seglimpeza;
+    public Double getSeg_limpeza() {
+        return seg_limpeza;
     }
 
-    public void setSeglimpeza(Double seglimpeza) {
-        this.seglimpeza = seglimpeza;
+    public void setSeg_limpeza(Double seg_limpeza) {
+        this.seg_limpeza = seg_limpeza;
     }
 
     public Double getSanepar() {
@@ -75,12 +73,12 @@ public class Financeiro {
         this.sanepar = sanepar;
     }
 
-    public Double getMatlimpeza() {
-        return matlimpeza;
+    public Double getMat_limpeza() {
+        return mat_limpeza;
     }
 
-    public void setMatlimpeza(Double matlimpeza) {
-        this.matlimpeza = matlimpeza;
+    public void setMat_limpeza(Double mat_limpeza) {
+        this.mat_limpeza = mat_limpeza;
     }
 
     public Double getCopel() {
@@ -99,12 +97,12 @@ public class Financeiro {
         this.marketing = marketing;
     }
 
-    public Double getContpraga() {
-        return contpraga;
+    public Double getCont_praga() {
+        return cont_praga;
     }
 
-    public void setContpraga(Double contpraga) {
-        this.contpraga = contpraga;
+    public void setCont_praga(Double cont_praga) {
+        this.cont_praga = cont_praga;
     }
 
     public Double getHonorario() {
@@ -123,12 +121,12 @@ public class Financeiro {
         this.entreterimento = entreterimento;
     }
 
-    public Double getColeta() {
-        return coleta;
+    public Double getColeta_lixo() {
+        return coleta_lixo;
     }
 
-    public void setColeta(Double coleta) {
-        this.coleta = coleta;
+    public void setColeta_lixo(Double coleta_lixo) {
+        this.coleta_lixo = coleta_lixo;
     }
 
     public Double getInternet() {
@@ -139,12 +137,12 @@ public class Financeiro {
         this.internet = internet;
     }
 
-    public Double getMatexpidiente() {
-        return matexpidiente;
+    public Double getMat_expediente() {
+        return mat_expediente;
     }
 
-    public void setMatexpidiente(Double matexpidiente) {
-        this.matexpidiente = matexpidiente;
+    public void setMat_expediente(Double mat_expediente) {
+        this.mat_expediente = mat_expediente;
     }
 
     public Double getManutencao() {

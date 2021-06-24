@@ -15,6 +15,7 @@ public class OperacaoFORM {
     @OneToOne
     private Locatario response;
     private long cnpj; /* OPCIONAL */
+    private Double cdr;
 
     /* ___________________________GETTERS and SETTERS___________________________ */
     public String getNome() {
@@ -49,10 +50,18 @@ public class OperacaoFORM {
         this.cnpj = cnpj;
     }
 
+    public Double getCdr() {
+        return cdr;
+    }
+
+    public void setCdr(Double cdr) {
+        this.cdr = cdr;
+    }
+
     /* ___________________________TO FORM___________________________ */
 
     public Operacao toForm(OperacaoRepository operacaoR) {
-        Operacao operacao = new Operacao(nome, razaosocial, response, cnpj);
+        Operacao operacao = new Operacao(nome, razaosocial, response, cnpj,cdr);
         operacaoR.save(operacao);
         return operacao;
     }
