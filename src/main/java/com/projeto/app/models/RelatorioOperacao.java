@@ -30,11 +30,10 @@ public class RelatorioOperacao {
 
     @Override
     public String toString() {
-        return "RelatorioOperacao [coleta_lixo=" + coleta_lixo + ", cont_praga=" + cont_praga + ", copel=" + copel
-                + ", data=" + data + ", entreterimento=" + entreterimento + ", honorario=" + honorario + ", id=" + id
-                + ", impostos=" + impostos + ", internet=" + internet + ", locacao=" + locacao + ", manutencao="
-                + manutencao + ", marketing=" + marketing + ", mat_expediente=" + mat_expediente + ", mat_limpeza="
-                + mat_limpeza + ", sanepar=" + sanepar + ", seg_limpeza=" + seg_limpeza + ", seguro=" + seguro + "]";
+        return "-----------Relatorio da Operacao de ID: " + id + "-----------" + "\n Data de criação do Relátorio " + data + "\n Valor| Coleta de Lixo : " + coleta_lixo + "\n Valor| Contenção de pragas : " + cont_praga + "\n Valor| Copel : " + copel
+                +  "\n Valor|  Entreterimento : " + entreterimento + "\n Valor|  Honorário : " + honorario + "\n Valor|  Impostos : " + impostos + "\n Valor|  Internet : " + internet + "\n Valor|  Locação : " + locacao + "\n Valor|  Manutenção : "
+                + manutencao + "\n Valor|  Markenting : " + marketing + "\n Valor|  Materiais de expediente : " + mat_expediente + "\n Valor|  Materiais de Limpeza : "
+                + mat_limpeza + "\n Valor|  Sanepar : " + sanepar + "\n Valor|  Segurança de Limpeza : " + seg_limpeza + "\n Valor|  Seguro : " + seguro + "\n-----------FIM DO RELATÓRIO-----------";
     }
 
     @Override

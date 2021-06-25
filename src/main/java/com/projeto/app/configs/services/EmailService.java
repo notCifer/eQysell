@@ -1,4 +1,4 @@
-package com.projeto.app.controllers;
+package com.projeto.app.configs.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -6,7 +6,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 @Service
-public class EmailController {
+public class EmailService {
 
     @Autowired
     private JavaMailSender mailSender;

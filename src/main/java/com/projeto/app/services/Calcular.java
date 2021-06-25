@@ -2,6 +2,8 @@ package com.projeto.app.services;
 
 import java.time.LocalDate;
 import java.util.List;
+
+import com.projeto.app.configs.services.EmailService;
 import com.projeto.app.models.Gestao;
 import com.projeto.app.models.Operacao;
 import com.projeto.app.models.RelatorioBruto;
@@ -80,7 +82,7 @@ public class Calcular {
     }
 
     public List<RelatorioOperacao> gerarByOperacao(RelatorioBruto relatorio, RelatorioOperacaoRepository relatorioOpR,
-            OperacaoRepository operacaoR, Long mes) {
+            OperacaoRepository operacaoR, Long mes, EmailService email) {
 
         Double totalCRD = 0.0;
 
@@ -142,9 +144,14 @@ public class Calcular {
                 }
             }
             int Datames = mes.intValue();
-            LocalDate mesDate = LocalDate.of(2001, Datames, 01);
+            LocalDate mesDate = LocalDate.of(2021, Datames, 01);
             relatorioOP.setData(mesDate);
             relatorioOpR.save(relatorioOP);
+            String relatorioString = relatorioOP.toString();
+            String relatorioMes = relatorioOP.getData().toString();
+            String realtorioOperacao = operacao.getNome();
+            email.enviarEmail("eqysselproj@gmail.com", relatorioString,
+                    "Relatorio do mês " + relatorioMes + " Operação :" + realtorioOperacao);
         }
         return relatorioOpR.findAll();
     }
