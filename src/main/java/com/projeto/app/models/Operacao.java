@@ -14,7 +14,7 @@ public class Operacao {
     @ManyToOne(cascade = CascadeType.ALL)
     private Locatario response;
     private long cnpj;
-    private Double cdr;
+    private Double crd;
 
     /* ___________________________CONSTRUTOR___________________________ */
 
@@ -26,7 +26,7 @@ public class Operacao {
         this.razaosocial = razaosocial;
         this.response = response;
         this.cnpj = cnpj;
-        this.cdr = cdr;
+        this.crd = cdr;
     }
 
     /* ___________________________GETTERS and SETTERS___________________________ */
@@ -72,11 +72,11 @@ public class Operacao {
     }
 
     public Double getCdr() {
-        return cdr;
+        return crd;
     }
 
     public void setCdr(Double cdr) {
-        this.cdr = cdr;
+        this.crd = cdr;
     }
 
 }
