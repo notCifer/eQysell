@@ -1,6 +1,7 @@
 package com.projeto.app.controllers;
 
 import java.util.List;
+import com.projeto.app.configs.services.EmailService;
 import com.projeto.app.models.Gestao;
 import com.projeto.app.models.RelatorioBruto;
 import com.projeto.app.models.RelatorioOperacao;
@@ -35,6 +36,9 @@ public class GestaoController {
 
     @Autowired
     private OperacaoRepository operacaoR;
+
+    @Autowired
+    private EmailService eController;
 
     @GetMapping
     public List<GestaoDTO> FindAll() {
@@ -76,7 +80,7 @@ public class GestaoController {
             RelatorioBruto relatorioBruto = relatorioR.findByMes(mes);
             if (relatorioBruto != null) {
                 List<RelatorioOperacao> ListCreateOperacao = calc.gerarByOperacao(relatorioBruto, relatorioOpR,
-                        operacaoR, mes);
+                        operacaoR, mes, eController);
                 return ResponseEntity.ok().body(ListCreateOperacao);
             }
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Não existe relatório para este mês");
