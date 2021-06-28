@@ -2,7 +2,11 @@ package com.projeto.app.models.form;
 
 import com.projeto.app.models.Locatario;
 import com.projeto.app.models.Operacao;
+import com.projeto.app.models.gestao.AtividadeEnum;
+import com.projeto.app.models.gestao.LocalizacaoEnum;
+import com.projeto.app.models.gestao.PisoEnum;
 import com.projeto.app.repositories.OperacaoRepository;
+import com.projeto.app.services.Calcular;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 
@@ -16,6 +20,10 @@ public class OperacaoFORM {
     private Locatario response;
     private long cnpj; /* OPCIONAL */
     private Double abl;
+    private AtividadeEnum atividadeEnum;
+    private LocalizacaoEnum localizaEnum;
+    private PisoEnum pisoEnum;
+
 
     /* ___________________________GETTERS and SETTERS___________________________ */
     public String getNome() {
@@ -50,21 +58,14 @@ public class OperacaoFORM {
         this.cnpj = cnpj;
     }
 
-    public Double getCdr() {
-        return abl;
-    }
-
-    public void setCdr(Double cdr) {
-        this.abl = cdr;
-    }
-
     /* ___________________________TO FORM___________________________ */
 
-    public Operacao toForm(OperacaoRepository operacaoR) {
-
-        // ---CALCULO---
-
-        Operacao operacao = new Operacao(nome, razaosocial, response, cnpj,abl);
+    public Operacao toForm(OperacaoRepository operacaoR, Calcular calc) {
+        Double totalCRD = 100000000.0;
+        Double calcCRD = calc.geraCRD(abl, atividadeEnum, localizaEnum, pisoEnum);
+        Double calculo = calcCRD * totalCRD;
+        Double resultado = calculo * abl;
+        Operacao operacao = new Operacao(nome, razaosocial, response, cnpj, resultado);
         operacaoR.save(operacao);
         return operacao;
     }

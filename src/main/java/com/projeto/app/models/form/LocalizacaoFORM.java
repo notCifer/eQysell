@@ -1,13 +1,13 @@
 package com.projeto.app.models.form;
 
 import com.projeto.app.models.Localizacao;
-import com.projeto.app.models.gestao.Enum_Local;
+import com.projeto.app.models.gestao.LocalizacaoEnum;
 import com.projeto.app.repositories.LocalizacaoRepository;
 
 public class LocalizacaoFORM {
 
     private Double percentual;
-    private Enum_Local local;
+    private LocalizacaoEnum local;
 
 
 
@@ -19,11 +19,11 @@ public class LocalizacaoFORM {
         this.percentual = percentual;
     }
 
-    public Enum_Local getLocal() {
+    public LocalizacaoEnum getLocal() {
         return local;
     }
 
-    public void setLocal(Enum_Local local) {
+    public void setLocal(LocalizacaoEnum local) {
         this.local = local;
     }
 

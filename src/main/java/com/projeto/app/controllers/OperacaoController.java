@@ -9,6 +9,7 @@ import com.projeto.app.models.Operacao;
 import com.projeto.app.models.dto.OperacaoDTO;
 import com.projeto.app.models.form.OperacaoFORM;
 import com.projeto.app.repositories.OperacaoRepository;
+import com.projeto.app.services.Calcular;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -32,6 +33,9 @@ public class OperacaoController {
 
     @Autowired
     private OperacaoRepository OR;
+
+    @Autowired
+    private Calcular calc;
 
     // @ApiOperation(value="Método de Listagem Completa")
     @GetMapping
@@ -71,7 +75,7 @@ public class OperacaoController {
     // @ApiOperation(value="Cadastro de Operações")
     public ResponseEntity<?> Add(@RequestBody @Valid OperacaoFORM OF, UriComponentsBuilder uri) {
         try {
-            Operacao o = OF.toForm(OR);
+            Operacao o = OF.toForm(OR,calc);
             URI u = uri.path("/operacao/{id}").buildAndExpand(o.getId()).toUri();
             return ResponseEntity.created(u).body(new OperacaoDTO().toDTO(o));
         } catch (DataIntegrityViolationException SQL) {
