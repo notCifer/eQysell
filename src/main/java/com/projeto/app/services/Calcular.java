@@ -2,7 +2,6 @@ package com.projeto.app.services;
 
 import java.time.LocalDate;
 import java.util.List;
-
 import com.projeto.app.configs.services.EmailService;
 import com.projeto.app.models.Gestao;
 import com.projeto.app.models.Operacao;
