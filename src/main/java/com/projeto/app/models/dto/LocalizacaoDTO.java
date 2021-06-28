@@ -1,12 +1,12 @@
 package com.projeto.app.models.dto;
 
 import com.projeto.app.models.Localizacao;
-import com.projeto.app.models.gestao.Enum_Local;
+import com.projeto.app.models.gestao.LocalizacaoEnum;
 
 public class LocalizacaoDTO {
 
     private Double percentual;
-    private Enum_Local local;
+    private LocalizacaoEnum local;
 
     public Double getPercentual() {
         return percentual;
@@ -16,11 +16,11 @@ public class LocalizacaoDTO {
         this.percentual = percentual;
     }
 
-    public Enum_Local getLocal() {
+    public LocalizacaoEnum getLocal() {
         return local;
     }
 
-    public void setLocal(Enum_Local local) {
+    public void setLocal(LocalizacaoEnum local) {
         this.local = local;
     }
 

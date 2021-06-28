@@ -1,6 +1,6 @@
 package com.projeto.app.models;
 
-import com.projeto.app.models.gestao.Enum_Local;
+import com.projeto.app.models.gestao.LocalizacaoEnum;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,12 +14,12 @@ public class Localizacao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Double percentual;
-    private Enum_Local local;
+    private LocalizacaoEnum local;
 
-    public Localizacao(Double percentual, Enum_Local local) {
+    public Localizacao(Double percentual, LocalizacaoEnum local) {
     }
 
-    public Localizacao(Long id, Double percentual, Enum_Local local) {
+    public Localizacao(Long id, Double percentual, LocalizacaoEnum local) {
         this.id = id;
         this.percentual = percentual;
         this.local = local;
@@ -45,11 +45,11 @@ public class Localizacao {
         this.percentual = percentual;
     }
 
-    public Enum_Local getLocal() {
+    public LocalizacaoEnum getLocal() {
         return local;
     }
 
-    public void setLocal(Enum_Local local) {
+    public void setLocal(LocalizacaoEnum local) {
         this.local = local;
     }
 }

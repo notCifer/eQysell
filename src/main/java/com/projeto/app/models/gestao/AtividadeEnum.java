@@ -1,13 +1,13 @@
 package com.projeto.app.models.gestao;
 
-public enum PisoEnum {
+public enum AtividadeEnum {
 
-    MARECHAL_DEODORO(1L, "Marechal Deodoro"), DECK(2L, "Deck"), JOSE_LOUREIRO(3L, "José Loureiro");
+    ALIMENTACAO(1L, "Alimentação"), OUTROS(2L, "Outros"), QUIOSQUE(3L, "Quiosque");
 
     private Long id;
     private String name;
 
-    private PisoEnum(Long id, String name) {
+    private AtividadeEnum(Long id, String name) {
         this.id = id;
         this.name = name;
     }
