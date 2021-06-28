@@ -7,7 +7,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 //@EnableSpringDataWebSupport
-//@EnableSwagger2
+@EnableSwagger2
 public class eQysellApplication {
 
 	public static void main(String[] args) {
