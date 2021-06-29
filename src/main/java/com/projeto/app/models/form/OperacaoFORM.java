@@ -2,19 +2,31 @@ package com.projeto.app.models.form;
 
 import com.projeto.app.models.Locatario;
 import com.projeto.app.models.Operacao;
+import com.projeto.app.models.gestao.AtividadeEnum;
+import com.projeto.app.models.gestao.LocalizacaoEnum;
+import com.projeto.app.models.gestao.PisoEnum;
 import com.projeto.app.repositories.OperacaoRepository;
-import javax.persistence.OneToOne;
+import com.projeto.app.services.Calcular;
+import com.projeto.app.services.EnumService;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 public class OperacaoFORM {
 
     @NotBlank
     private String nome;
-    @NotBlank
     private String razaosocial; /* OPCIONAL */
-    @OneToOne
-    private Locatario response;
     private long cnpj; /* OPCIONAL */
+    @NotNull
+    private Double abl;
+    @NotNull
+    private Long atividade;
+    @NotNull
+    private Long localiza;
+    @NotNull
+    private Long piso;
+    @NotNull
+    private Locatario response;
 
     /* ___________________________GETTERS and SETTERS___________________________ */
     public String getNome() {
@@ -49,10 +61,50 @@ public class OperacaoFORM {
         this.cnpj = cnpj;
     }
 
+    public Double getAbl() {
+        return abl;
+    }
+
+    public void setAbl(Double abl) {
+        this.abl = abl;
+    }
+
+    public Long getAtividade() {
+        return atividade;
+    }
+
+    public void setAtividade(Long atividade) {
+        this.atividade = atividade;
+    }
+
+    public Long getLocaliza() {
+        return localiza;
+    }
+
+    public void setLocaliza(Long localiza) {
+        this.localiza = localiza;
+    }
+
+    public Long getPiso() {
+        return piso;
+    }
+
+    public void setPiso(Long piso) {
+        this.piso = piso;
+    }
+
     /* ___________________________TO FORM___________________________ */
 
-    public Operacao toForm(OperacaoRepository operacaoR) {
-        Operacao operacao = new Operacao(nome, razaosocial, response, cnpj);
+    public Operacao toFORM(OperacaoRepository operacaoR, Calcular calc, EnumService enumS) {
+        Double totalCRD = 1.0;
+        LocalizacaoEnum localizaEnum = enumS.findLocaliza(localiza);
+        PisoEnum pisoEnum = enumS.findPiso(piso);
+        AtividadeEnum atividadeEnum = enumS.findAtividade(atividade);
+        
+        Double calcCRD = calc.geraCRD(abl, atividadeEnum, localizaEnum, pisoEnum);
+        Double calculo = calcCRD * totalCRD;
+        Double resultado = calculo * abl;
+        Operacao operacao = new Operacao(nome, razaosocial, response, cnpj, resultado);
         operacaoR.save(operacao);
         return operacao;
     }

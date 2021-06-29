@@ -14,20 +14,22 @@ public class Operacao {
     @ManyToOne(cascade = CascadeType.ALL)
     private Locatario response;
     private long cnpj;
+    private Double crd;
 
     /* ___________________________CONSTRUTOR___________________________ */
 
     public Operacao() {
     }
 
-    /* ___________________________GETTERS and SETTERS___________________________ */
-
-    public Operacao(String nome, String razaosocial, Locatario response, long cnpj) {
+    public Operacao(String nome, String razaosocial, Locatario response, long cnpj, Double cdr) {
         this.nome = nome;
         this.razaosocial = razaosocial;
         this.response = response;
         this.cnpj = cnpj;
+        this.crd = cdr;
     }
+
+    /* ___________________________GETTERS and SETTERS___________________________ */
 
     public Long getId() {
         return id;
@@ -67,6 +69,14 @@ public class Operacao {
 
     public void setCnpj(long cnpj) {
         this.cnpj = cnpj;
+    }
+
+    public Double getCdr() {
+        return crd;
+    }
+
+    public void setCdr(Double cdr) {
+        this.crd = cdr;
     }
 
 }
