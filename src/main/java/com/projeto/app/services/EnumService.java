@@ -3,6 +3,7 @@ package com.projeto.app.services;
 import com.projeto.app.models.gestao.AtividadeEnum;
 import com.projeto.app.models.gestao.LocalizacaoEnum;
 import com.projeto.app.models.gestao.PisoEnum;
+import com.projeto.app.models.gestao.TipoEnum;
 
 import org.springframework.stereotype.Service;
 
@@ -36,6 +37,21 @@ public class EnumService {
                 return localizacaoEnum;
             }
         }
+        
+
+
+        return null;
+    }
+
+    public TipoEnum findSaneparP(Long id) {
+        TipoEnum[] list = TipoEnum.values();
+        for (TipoEnum tipoEnum : list) {
+            if (id == tipoEnum.getId()) {
+                return tipoEnum;
+            }
+        }
+        
+
         return null;
     }
 
