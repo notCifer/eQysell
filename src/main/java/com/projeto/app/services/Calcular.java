@@ -182,35 +182,24 @@ public class Calcular {
 
     public Double geraCRD(Double Abl, AtividadeEnum atividadeEnum, LocalizacaoEnum localizaEnum, PisoEnum pisoEnum) {
 
-        Long idAtividade = 0L;
-        for (AtividadeEnum atividade : AtividadeEnum.values()) {
-            if (atividadeEnum.getId() == atividade.getId()) {
-                idAtividade = atividade.getId();
-            }
-        }
-        Atividade atividade = atividadeR.findByTipo(idAtividade);
+        Long atividadeLong = atividadeEnum.getId();
+        Long converteA = atividadeLong - 1;
+        Atividade atividade = atividadeR.findByTipo(converteA);
         Double atividadeValor = atividade.getPorcetagem();
 
-        Long idLocaliza = 0L;
-        for (LocalizacaoEnum localizacaoEnum : LocalizacaoEnum.values()) {
-            if (localizaEnum.getId() == localizacaoEnum.getId()) {
-                idLocaliza = localizacaoEnum.getId();
-            }
-        }
-        Localizacao localizacao = localizaR.findByTipo(idLocaliza);
+
+        Long localizaLong = localizaEnum.getId();
+        Long converteL = localizaLong - 1;
+        Localizacao localizacao = localizaR.findByTipo(converteL);
         Double localizaValor = localizacao.getPercentual();
 
-        Long idPiso = 0L;
-        for (PisoEnum pEnum : PisoEnum.values()) {
-            if (pisoEnum.getId() == pEnum.getId()) {
-                idPiso = pEnum.getId();
-            }
-        }
-        Piso piso = pisoR.findByTipo(idPiso);
+        Long pisoLong = pisoEnum.getId();
+        Long converteP = pisoLong - 1;
+        Piso piso = pisoR.findByTipo(converteP);
         Double pisoValor = piso.getPorcentagem();
 
-        Double Abl2 = Abl + 1;
-        Abl -= 1;
+        Double Abl2 = Abl + 0.4;
+        Abl -= 0.4;
         Abl abl = ablR.findByValor(Abl, Abl2);
         Double ablValor = abl.getPorcento();
 
