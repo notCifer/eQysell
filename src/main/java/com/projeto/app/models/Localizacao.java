@@ -16,18 +16,13 @@ public class Localizacao {
     private Double percentual;
     private LocalizacaoEnum local;
 
-    public Localizacao(Double percentual, LocalizacaoEnum local) {
+    public Localizacao() {
     }
 
-    public Localizacao(Long id, Double percentual, LocalizacaoEnum local) {
-        this.id = id;
+    public Localizacao(Double percentual, LocalizacaoEnum local) {
         this.percentual = percentual;
         this.local = local;
     }
-
-
-
-
 
     public Long getId() {
         return id;

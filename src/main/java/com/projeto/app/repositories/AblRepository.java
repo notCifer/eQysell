@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AblRepository extends JpaRepository<Abl,Long> {
     
-    @Query(value = "SELECT * FROM ABL WHERE VALOR between ?1 AND ?2;",nativeQuery = true)
-    Abl findByValor(Double valor, Double valor2);
+    @Query(value = "SELECT * FROM ABL WHERE VALOR between ?1 AND ?2",nativeQuery = true)
+    Abl findByValor(Double valor2,Double valor);
 }
