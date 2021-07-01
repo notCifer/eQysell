@@ -3,6 +3,7 @@ package com.projeto.app.controllers;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
+
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import javax.validation.ValidationException;
@@ -11,6 +12,7 @@ import com.projeto.app.models.dto.PessoaDTO;
 import com.projeto.app.models.form.PessoaFORM;
 import com.projeto.app.repositories.PessoaRepository;
 import com.projeto.app.repositories.UsuarioRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
