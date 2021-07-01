@@ -8,6 +8,8 @@ import com.projeto.app.models.gestao.PisoEnum;
 import com.projeto.app.repositories.OperacaoRepository;
 import com.projeto.app.services.Calcular;
 import com.projeto.app.services.EnumService;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -27,6 +29,12 @@ public class OperacaoFORM {
     private Long piso;
     @NotNull
     private Locatario response;
+
+    @Autowired
+    private Calcular calc;
+
+    @Autowired
+    private EnumService enumS;
 
     /* ___________________________GETTERS and SETTERS___________________________ */
     public String getNome() {

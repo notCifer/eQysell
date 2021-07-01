@@ -9,6 +9,8 @@ import com.projeto.app.models.Operacao;
 import com.projeto.app.models.dto.OperacaoDTO;
 import com.projeto.app.models.form.OperacaoFORM;
 import com.projeto.app.repositories.OperacaoRepository;
+import com.projeto.app.services.Calcular;
+import com.projeto.app.services.EnumService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -27,6 +29,13 @@ public class OperacaoController {
 
     @Autowired
     private OperacaoRepository OR;
+
+    @Autowired
+    private Calcular calc;
+
+    @Autowired
+    private EnumService enumS;
+
 
     @ApiOperation(value="Método de Listagem Completa")
     @GetMapping
