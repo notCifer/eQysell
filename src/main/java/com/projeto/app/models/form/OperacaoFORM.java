@@ -95,7 +95,7 @@ public class OperacaoFORM {
 
     /* ___________________________TO FORM___________________________ */
 
-    public Operacao toFORM(OperacaoRepository operacaoR, Calcular calc, EnumService enumS) {
+    public Operacao toFORM(OperacaoRepository operacaoR) {
         Double totalCRD = 1.0;
         LocalizacaoEnum localizaEnum = enumS.findLocaliza(localiza);
         PisoEnum pisoEnum = enumS.findPiso(piso);
