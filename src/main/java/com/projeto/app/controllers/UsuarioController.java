@@ -3,7 +3,6 @@ package com.projeto.app.controllers;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
-
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import com.projeto.app.models.Usuario;

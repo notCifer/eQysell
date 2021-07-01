@@ -1,15 +1,14 @@
 package com.projeto.app.models.form;
 
 import com.projeto.app.models.Localizacao;
-import com.projeto.app.models.gestao.Enum_Local;
+import com.projeto.app.models.gestao.LocalizacaoEnum;
 import com.projeto.app.repositories.LocalizacaoRepository;
+import com.projeto.app.services.EnumService;
 
 public class LocalizacaoFORM {
 
+    private Long idEnum;
     private Double percentual;
-    private Enum_Local local;
-
-
 
     public Double getPercentual() {
         return percentual;
@@ -19,17 +18,18 @@ public class LocalizacaoFORM {
         this.percentual = percentual;
     }
 
-    public Enum_Local getLocal() {
-        return local;
+    public Long getIdEnum() {
+        return idEnum;
     }
 
-    public void setLocal(Enum_Local local) {
-        this.local = local;
+    public void setIdEnum(Long idEnum) {
+        this.idEnum = idEnum;
     }
 
-    public Localizacao toForm(LocalizacaoRepository LR){
-        Double porcentagem = percentual/100;
-        Localizacao localizacao = new Localizacao(porcentagem, local);
+    public Localizacao toFORM(LocalizacaoRepository LR,EnumService enumS) {
+        Double porcentagem = percentual / 100;
+        LocalizacaoEnum localizacaoEnum = enumS.findLocaliza(idEnum);
+        Localizacao localizacao = new Localizacao(porcentagem, localizacaoEnum);
         LR.save(localizacao);
         return localizacao;
     }

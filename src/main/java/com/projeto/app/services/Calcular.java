@@ -2,20 +2,44 @@ package com.projeto.app.services;
 
 import java.time.LocalDate;
 import java.util.List;
-
 import com.projeto.app.configs.services.EmailService;
+import com.projeto.app.models.Abl;
+import com.projeto.app.models.Atividade;
 import com.projeto.app.models.Gestao;
+import com.projeto.app.models.Localizacao;
 import com.projeto.app.models.Operacao;
+import com.projeto.app.models.Piso;
 import com.projeto.app.models.RelatorioBruto;
 import com.projeto.app.models.RelatorioOperacao;
+import com.projeto.app.models.gestao.AtividadeEnum;
+import com.projeto.app.models.gestao.LocalizacaoEnum;
+import com.projeto.app.models.gestao.PisoEnum;
 import com.projeto.app.models.gestao.TipoEnum;
+import com.projeto.app.repositories.AblRepository;
+import com.projeto.app.repositories.AtividadeRepository;
 import com.projeto.app.repositories.GestaoRepository;
+import com.projeto.app.repositories.LocalizacaoRepository;
 import com.projeto.app.repositories.OperacaoRepository;
+import com.projeto.app.repositories.PisoRepository;
 import com.projeto.app.repositories.RelatorioOperacaoRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class Calcular {
+
+    @Autowired
+    private AtividadeRepository atividadeR;
+
+    @Autowired
+    private LocalizacaoRepository localizaR;
+
+    @Autowired
+    private AblRepository ablR;
+
+    @Autowired
+    private PisoRepository pisoR;
 
     public Double calcularPeloTipo(List<Gestao> dados) {
         Double total = 0.0;
@@ -155,4 +179,35 @@ public class Calcular {
         }
         return relatorioOpR.findAll();
     }
+
+    public Double geraCRD(Double Abl, AtividadeEnum atividadeEnum, LocalizacaoEnum localizaEnum, PisoEnum pisoEnum) {
+
+        Long atividadeLong = atividadeEnum.getId();
+        Long converteA = atividadeLong - 1;
+        Atividade atividade = atividadeR.findByTipo(converteA);
+        Double atividadeValor = atividade.getPorcetagem();
+
+
+        Long localizaLong = localizaEnum.getId();
+        Long converteL = localizaLong - 1;
+        Localizacao localizacao = localizaR.findByTipo(converteL);
+        Double localizaValor = localizacao.getPercentual();
+
+        Long pisoLong = pisoEnum.getId();
+        Long converteP = pisoLong - 1;
+        Piso piso = pisoR.findByTipo(converteP);
+        Double pisoValor = piso.getPorcentagem();
+
+        Double Abl2 = Abl + 0.4;
+        Abl -= 0.4;
+        Abl abl = ablR.findByValor(Abl, Abl2);
+        Double ablValor = abl.getPorcento();
+
+        Double porcetagem = atividadeValor * localizaValor * pisoValor * ablValor;
+
+        return porcetagem;
+
+    }
+
 }
+
