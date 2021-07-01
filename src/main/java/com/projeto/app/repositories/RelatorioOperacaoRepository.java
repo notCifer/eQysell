@@ -1,7 +1,6 @@
 package com.projeto.app.repositories;
 
 import java.util.List;
-
 import com.projeto.app.models.RelatorioOperacao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

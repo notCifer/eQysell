@@ -4,7 +4,6 @@ import com.projeto.app.models.gestao.AtividadeEnum;
 import com.projeto.app.models.gestao.LocalizacaoEnum;
 import com.projeto.app.models.gestao.PisoEnum;
 import com.projeto.app.models.gestao.TipoEnum;
-
 import org.springframework.stereotype.Service;
 
 @Service

@@ -14,16 +14,5 @@ public class eQysellApplication {
 		SpringApplication.run(eQysellApplication.class, args);
 	}
 
-	/* __________________Teste Email_________________ */
-
-	// @EventListener(ApplicationReadyEvent.class)
-	// public void email(){
-	// 	service.enviarEmail("eqysselproj@gmail.com", "Teste...","teste.");
-	// }
-
-	//############## Teste PJ ###############//
-
 }
-
-
 	

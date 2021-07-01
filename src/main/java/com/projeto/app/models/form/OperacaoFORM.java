@@ -8,8 +8,6 @@ import com.projeto.app.models.gestao.PisoEnum;
 import com.projeto.app.repositories.OperacaoRepository;
 import com.projeto.app.services.Calcular;
 import com.projeto.app.services.EnumService;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -29,12 +27,6 @@ public class OperacaoFORM {
     private Long piso;
     @NotNull
     private Locatario response;
-
-    @Autowired
-    private Calcular calc;
-
-    @Autowired
-    private EnumService enumS;
 
     /* ___________________________GETTERS and SETTERS___________________________ */
     public String getNome() {
@@ -103,12 +95,12 @@ public class OperacaoFORM {
 
     /* ___________________________TO FORM___________________________ */
 
-    public Operacao toFORM(OperacaoRepository operacaoR) {
+    public Operacao toFORM(OperacaoRepository operacaoR, EnumService enumS, Calcular calc) {
         Double totalCRD = 1.0;
         LocalizacaoEnum localizaEnum = enumS.findLocaliza(localiza);
         PisoEnum pisoEnum = enumS.findPiso(piso);
         AtividadeEnum atividadeEnum = enumS.findAtividade(atividade);
-        
+
         Double calcCRD = calc.geraCRD(abl, atividadeEnum, localizaEnum, pisoEnum);
         Double calculo = calcCRD * totalCRD;
         Double resultado = calculo * abl;

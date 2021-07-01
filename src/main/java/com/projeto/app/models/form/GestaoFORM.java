@@ -1,7 +1,6 @@
 package com.projeto.app.models.form;
 
 import java.time.LocalDate;
-
 import com.projeto.app.models.Gestao;
 import com.projeto.app.models.gestao.TipoEnum;
 import com.projeto.app.repositories.GestaoRepository;

@@ -1,37 +1,36 @@
 package com.projeto.app.models.form;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import com.projeto.app.models.Usuario;
 import com.projeto.app.repositories.UsuarioRepository;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class UsuarioFORM {
 
     @NotBlank
     private String email;
     @NotBlank
-    @Size(min = 5)
     private String senha;
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getSenha() {
         return senha;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public Usuario toFORM(UsuarioRepository usuarioR) {
+    public void setSenha(String senha) {
+        this.senha = new BCryptPasswordEncoder().encode(senha);
+    }
+
+    public Usuario toFORM(UsuarioRepository UsuarioR) {
         Usuario usuario = new Usuario(email, senha);
-        usuarioR.save(usuario);
+        UsuarioR.save(usuario);
         return usuario;
     }
 

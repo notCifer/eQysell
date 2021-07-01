@@ -22,7 +22,6 @@ import com.projeto.app.repositories.LocalizacaoRepository;
 import com.projeto.app.repositories.OperacaoRepository;
 import com.projeto.app.repositories.PisoRepository;
 import com.projeto.app.repositories.RelatorioOperacaoRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
