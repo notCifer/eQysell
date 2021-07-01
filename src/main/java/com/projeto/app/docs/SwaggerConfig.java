@@ -1,16 +1,22 @@
-package com.projeto.app.swagger;
+package com.projeto.app.docs;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import com.google.common.base.Predicates;
+import com.projeto.app.models.Usuario;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import springfox.documentation.builders.ParameterBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.schema.ModelRef;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.service.VendorExtension;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
-import java.util.ArrayList;
 
 //Link do Swagger : localhost : PORTA / swagger-ui.html
 
@@ -19,20 +25,24 @@ import java.util.ArrayList;
 public class SwaggerConfig {
 
     @Bean
-    public Docket galpao() {
-        return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.any())
-                .paths(PathSelectors.any())
-                // .paths(Predicates.not(PathSelectors.regex("/error.*")))
-                .build().apiInfo(metaInfo()).ignoredParameterTypes();
-        // .globalOperationParameters(Arrays.asList(
-        // new ParameterBuilder()
-        // .name("Authorization")
-        // .description("Header para usar TOKEN")
-        /// .modelRef(new ModelRef("string"))
-        // .parameterType("header")
-        // .required(false)
-        // .build()
-        // ));
+    public Docket Api(){
+        return new Docket(DocumentationType.SWAGGER_2)
+        .apiInfo (metaInfo())
+        .select()
+        .apis(RequestHandlerSelectors.any())
+        .paths(PathSelectors.ant("/**"))
+        .paths(Predicates.not(PathSelectors.regex("/error.*")))
+        .build()
+        .ignoredParameterTypes(Usuario.class)
+        .globalOperationParameters(Arrays.asList(
+            new ParameterBuilder()
+            .name("Authorization")
+            .description("Bearer + TOKEN ")
+            .modelRef(new ModelRef("string"))
+            .parameterType("header")
+            .required(false)
+            .build()
+        ));
     }
 
     private ApiInfo metaInfo() {

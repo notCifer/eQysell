@@ -13,11 +13,15 @@ import com.projeto.app.repositories.OperacaoRepository;
 import com.projeto.app.repositories.RelatorioBrutoRepository;
 import com.projeto.app.repositories.RelatorioOperacaoRepository;
 import com.projeto.app.services.Calcular;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@Api(tags = { "Gestão" })
+@CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/gestao")
 public class GestaoController {
@@ -40,7 +44,10 @@ public class GestaoController {
     @Autowired
     private EmailService eController;
 
+        //_____Métodos_____//
+
     @GetMapping
+    @ApiOperation(value="Listagem Completa da Gestão")
     public List<GestaoDTO> FindAll() {
         GestaoDTO DTO = new GestaoDTO();
         List<Gestao> gList = gestaoR.findAll();
@@ -48,6 +55,7 @@ public class GestaoController {
     }
 
     @GetMapping("/{mes}")
+    @ApiOperation(value="Busca por mês")
     public ResponseEntity<?> Total(@PathVariable("mes") Long mes) {
         RelatorioBruto relatorio = new RelatorioBruto();
         for (int tipo = 0; tipo < TipoEnum.values().length; tipo++) {
@@ -58,6 +66,7 @@ public class GestaoController {
     }
 
     @PostMapping
+    @ApiOperation(value="Postagem")
     public GestaoDTO Add(@RequestBody GestaoFORM FORM) {
         GestaoDTO DTO = new GestaoDTO();
         Gestao gestao = FORM.toFORM(gestaoR);
@@ -65,6 +74,7 @@ public class GestaoController {
     }
 
     @GetMapping("/op/{mes}")
+    @ApiOperation(value="Busca por mês respectiva à operações")
     public ResponseEntity<?> FindRelatorioOpByMes(@PathVariable("mes") Long mes) {
         List<RelatorioOperacao> listaRelatorioOperacao = relatorioOpR.findAllByMes(mes);
         if (listaRelatorioOperacao.isEmpty()) {
@@ -74,6 +84,7 @@ public class GestaoController {
     }
 
     @GetMapping("/op/create/{mes}")
+    @ApiOperation(value="Busca por relatório")
     public ResponseEntity<?> CreatebyOperacao(@PathVariable("mes") Long mes) {
 
         if (mes <= 12 && mes != 0) {
