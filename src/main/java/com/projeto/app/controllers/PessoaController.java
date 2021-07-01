@@ -13,18 +13,16 @@ import com.projeto.app.models.form.PessoaFORM;
 import com.projeto.app.repositories.PessoaRepository;
 import com.projeto.app.repositories.UsuarioRepository;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+@Api(tags = { "Pessoa" })
+@CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/pessoa")
 public class PessoaController {
@@ -35,6 +33,9 @@ public class PessoaController {
     @Autowired
     private UsuarioRepository usuarioR;
 
+    //_____Métodos_____//
+
+    @ApiOperation(value="Listagem Completa de Pessoa")
     @GetMapping
     public ResponseEntity<?> FindAll() {
         PessoaDTO DTO = new PessoaDTO();
@@ -46,6 +47,7 @@ public class PessoaController {
     }
 
     @GetMapping("/{id}")
+    @ApiOperation(value="Busca por ID")
     public ResponseEntity<?> FindByID(@PathVariable Long id) {
         PessoaDTO DTO = new PessoaDTO();
         try {
@@ -58,6 +60,7 @@ public class PessoaController {
     }
 
     @DeleteMapping("/{id}")
+    @ApiOperation(value="Delete")
     public ResponseEntity<?> DeleteByID(@PathVariable Long id) {
         Optional<Pessoa> pessoa = pessoaR.findById(id);
 
@@ -69,6 +72,7 @@ public class PessoaController {
     }
 
     @PostMapping
+    @ApiOperation(value="Postagem")
     public ResponseEntity<?> Add(@RequestBody @Valid PessoaFORM FORM, UriComponentsBuilder uriBuilder) {
         PessoaDTO DTO = new PessoaDTO();
         try {
