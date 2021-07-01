@@ -1,4 +1,4 @@
-package com.projeto.app.docs;
+package com.projeto.app.configs.docs;
 
 import java.util.ArrayList;
 import java.util.Arrays;
