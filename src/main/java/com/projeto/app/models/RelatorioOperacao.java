@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class RelatorioOperacao {
@@ -12,6 +13,8 @@ public class RelatorioOperacao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDate data;
+    @ManyToOne
+    private Operacao operacao;
     private Double seg_limpeza;
     private Double sanepar;
     private Double mat_limpeza;
@@ -27,134 +30,35 @@ public class RelatorioOperacao {
     private Double impostos;
     private Double locacao;
     private Double seguro;
+    private Double total;
 
     @Override
     public String toString() {
-        return "-----------Relatorio da Operacao de ID: " + id + "-----------" + "\n Data de criação do Relátorio " + data + "\n Valor| Coleta de Lixo : " + coleta_lixo + "\n Valor| Contenção de pragas : " + cont_praga + "\n Valor| Copel : " + copel
-                +  "\n Valor|  Entreterimento : " + entreterimento + "\n Valor|  Honorário : " + honorario + "\n Valor|  Impostos : " + impostos + "\n Valor|  Internet : " + internet + "\n Valor|  Locação : " + locacao + "\n Valor|  Manutenção : "
-                + manutencao + "\n Valor|  Markenting : " + marketing + "\n Valor|  Materiais de expediente : " + mat_expediente + "\n Valor|  Materiais de Limpeza : "
-                + mat_limpeza + "\n Valor|  Sanepar : " + sanepar + "\n Valor|  Segurança de Limpeza : " + seg_limpeza + "\n Valor|  Seguro : " + seguro + "\n-----------FIM DO RELATÓRIO-----------";
+        return "-----------Relatorio da Operacao de ID: " + id + "-----------" + "\n Data de criação do Relátorio "
+                + data + "\n Valor| Coleta de Lixo : " + coleta_lixo + "\n Valor| Contenção de pragas : " + cont_praga
+                + "\n Valor| Copel : " + copel + "\n Valor|  Entreterimento : " + entreterimento
+                + "\n Valor|  Honorário : " + honorario + "\n Valor|  Impostos : " + impostos + "\n Valor|  Internet : "
+                + internet + "\n Valor|  Locação : " + locacao + "\n Valor|  Manutenção : " + manutencao
+                + "\n Valor|  Markenting : " + marketing + "\n Valor|  Materiais de expediente : " + mat_expediente
+                + "\n Valor|  Materiais de Limpeza : " + mat_limpeza + "\n Valor|  Sanepar : " + sanepar
+                + "\n Valor|  Segurança de Limpeza : " + seg_limpeza + "\n Valor|  Seguro : " + seguro + "\n TOTAL : "
+                + total + "\n-----------FIM DO RELATÓRIO-----------";
     }
 
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((coleta_lixo == null) ? 0 : coleta_lixo.hashCode());
-        result = prime * result + ((cont_praga == null) ? 0 : cont_praga.hashCode());
-        result = prime * result + ((copel == null) ? 0 : copel.hashCode());
-        result = prime * result + ((data == null) ? 0 : data.hashCode());
-        result = prime * result + ((entreterimento == null) ? 0 : entreterimento.hashCode());
-        result = prime * result + ((honorario == null) ? 0 : honorario.hashCode());
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((impostos == null) ? 0 : impostos.hashCode());
-        result = prime * result + ((internet == null) ? 0 : internet.hashCode());
-        result = prime * result + ((locacao == null) ? 0 : locacao.hashCode());
-        result = prime * result + ((manutencao == null) ? 0 : manutencao.hashCode());
-        result = prime * result + ((marketing == null) ? 0 : marketing.hashCode());
-        result = prime * result + ((mat_expediente == null) ? 0 : mat_expediente.hashCode());
-        result = prime * result + ((mat_limpeza == null) ? 0 : mat_limpeza.hashCode());
-        result = prime * result + ((sanepar == null) ? 0 : sanepar.hashCode());
-        result = prime * result + ((seg_limpeza == null) ? 0 : seg_limpeza.hashCode());
-        result = prime * result + ((seguro == null) ? 0 : seguro.hashCode());
-        return result;
+    public Double getTotal() {
+        return total;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        RelatorioOperacao other = (RelatorioOperacao) obj;
-        if (coleta_lixo == null) {
-            if (other.coleta_lixo != null)
-                return false;
-        } else if (!coleta_lixo.equals(other.coleta_lixo))
-            return false;
-        if (cont_praga == null) {
-            if (other.cont_praga != null)
-                return false;
-        } else if (!cont_praga.equals(other.cont_praga))
-            return false;
-        if (copel == null) {
-            if (other.copel != null)
-                return false;
-        } else if (!copel.equals(other.copel))
-            return false;
-        if (data == null) {
-            if (other.data != null)
-                return false;
-        } else if (!data.equals(other.data))
-            return false;
-        if (entreterimento == null) {
-            if (other.entreterimento != null)
-                return false;
-        } else if (!entreterimento.equals(other.entreterimento))
-            return false;
-        if (honorario == null) {
-            if (other.honorario != null)
-                return false;
-        } else if (!honorario.equals(other.honorario))
-            return false;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        if (impostos == null) {
-            if (other.impostos != null)
-                return false;
-        } else if (!impostos.equals(other.impostos))
-            return false;
-        if (internet == null) {
-            if (other.internet != null)
-                return false;
-        } else if (!internet.equals(other.internet))
-            return false;
-        if (locacao == null) {
-            if (other.locacao != null)
-                return false;
-        } else if (!locacao.equals(other.locacao))
-            return false;
-        if (manutencao == null) {
-            if (other.manutencao != null)
-                return false;
-        } else if (!manutencao.equals(other.manutencao))
-            return false;
-        if (marketing == null) {
-            if (other.marketing != null)
-                return false;
-        } else if (!marketing.equals(other.marketing))
-            return false;
-        if (mat_expediente == null) {
-            if (other.mat_expediente != null)
-                return false;
-        } else if (!mat_expediente.equals(other.mat_expediente))
-            return false;
-        if (mat_limpeza == null) {
-            if (other.mat_limpeza != null)
-                return false;
-        } else if (!mat_limpeza.equals(other.mat_limpeza))
-            return false;
-        if (sanepar == null) {
-            if (other.sanepar != null)
-                return false;
-        } else if (!sanepar.equals(other.sanepar))
-            return false;
-        if (seg_limpeza == null) {
-            if (other.seg_limpeza != null)
-                return false;
-        } else if (!seg_limpeza.equals(other.seg_limpeza))
-            return false;
-        if (seguro == null) {
-            if (other.seguro != null)
-                return false;
-        } else if (!seguro.equals(other.seguro))
-            return false;
-        return true;
+    public void setTotal(Double total) {
+        this.total = total;
+    }
+
+    public Operacao getOperacao() {
+        return operacao;
+    }
+
+    public void setOperacao(Operacao operacao) {
+        this.operacao = operacao;
     }
 
     public Long getId() {

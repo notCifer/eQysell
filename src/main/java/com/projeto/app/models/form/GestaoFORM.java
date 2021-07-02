@@ -4,12 +4,13 @@ import java.time.LocalDate;
 import com.projeto.app.models.Gestao;
 import com.projeto.app.models.gestao.TipoEnum;
 import com.projeto.app.repositories.GestaoRepository;
+import com.projeto.app.services.EnumService;
 
 public class GestaoFORM {
 
     private String descricao;
     private Double valor;
-    private TipoEnum tipo;
+    private Long idTipo;
 
     public String getDescricao() {
         return descricao;
@@ -27,16 +28,17 @@ public class GestaoFORM {
         this.valor = valor;
     }
 
-    public TipoEnum getTipo() {
-        return tipo;
+    public Long getidTipo() {
+        return idTipo;
     }
 
-    public void setTipo(TipoEnum tipo) {
-        this.tipo = tipo;
+    public void setidTipo(Long tipo) {
+        this.idTipo = tipo;
     }
 
-    public Gestao toFORM(GestaoRepository gestaoR){
+    public Gestao toFORM(GestaoRepository gestaoR, EnumService enumS) {
         LocalDate agora = LocalDate.now();
+        TipoEnum tipo = enumS.findTipo(idTipo);
         Gestao gestao = new Gestao(descricao, valor, tipo, agora);
         gestaoR.save(gestao);
         return gestao;

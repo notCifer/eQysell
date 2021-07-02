@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import com.google.common.base.Predicates;
 import com.projeto.app.models.Usuario;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ParameterBuilder;

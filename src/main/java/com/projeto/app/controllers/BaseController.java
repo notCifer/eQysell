@@ -1,9 +1,7 @@
 package com.projeto.app.controllers;
 
 import java.util.List;
-
 import javax.validation.Valid;
-
 import com.projeto.app.models.Abl;
 import com.projeto.app.models.Atividade;
 import com.projeto.app.models.Localizacao;
@@ -17,7 +15,6 @@ import com.projeto.app.repositories.AtividadeRepository;
 import com.projeto.app.repositories.LocalizacaoRepository;
 import com.projeto.app.repositories.PisoRepository;
 import com.projeto.app.services.EnumService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,7 +35,6 @@ public class BaseController {
     private PisoRepository pisoR;
     @Autowired
     private AblRepository ablR;
-
     @Autowired
     private EnumService enumS;
 

@@ -13,6 +13,8 @@ import com.projeto.app.repositories.OperacaoRepository;
 import com.projeto.app.repositories.RelatorioBrutoRepository;
 import com.projeto.app.repositories.RelatorioOperacaoRepository;
 import com.projeto.app.services.Calcular;
+import com.projeto.app.services.EnumService;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +23,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @Api(tags = { "Gestão" })
-@CrossOrigin(origins="*")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/gestao")
 public class GestaoController {
@@ -44,37 +46,31 @@ public class GestaoController {
     @Autowired
     private EmailService eController;
 
-        //_____Métodos_____//
+    @Autowired
+    private EnumService enumS;
 
-    @GetMapping
-    @ApiOperation(value="Listagem Completa da Gestão")
+    // _____Métodos_____//
+
+    @GetMapping("/despesa")
+    @ApiOperation(value = "Lista todas as despesas")
     public List<GestaoDTO> FindAll() {
         GestaoDTO DTO = new GestaoDTO();
         List<Gestao> gList = gestaoR.findAll();
         return DTO.toDTO(gList);
     }
 
-    @GetMapping("/{mes}")
-    @ApiOperation(value="Busca por mês")
-    public ResponseEntity<?> Total(@PathVariable("mes") Long mes) {
-        RelatorioBruto relatorio = new RelatorioBruto();
-        for (int tipo = 0; tipo < TipoEnum.values().length; tipo++) {
-            relatorio = calc.gerarBruto(gestaoR, tipo, mes, relatorio);
+    @GetMapping("/relatorio/base/{mes}")
+    @ApiOperation(value = "Buscar relatório base apartir do mês!")
+    public ResponseEntity<?> FindRelatorioBaseByMes(@PathVariable("mes") Long mes) {
+        RelatorioBruto relatorio = relatorioR.findByMes(mes);
+        if (relatorio == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Lista de Relatórios por operação esta vazia");
         }
-        relatorioR.save(relatorio);
-        return ResponseEntity.ok().body(relatorio);
+        return ResponseEntity.status(HttpStatus.FOUND).body(relatorio);
     }
 
-    @PostMapping
-    @ApiOperation(value="Postagem")
-    public GestaoDTO Add(@RequestBody GestaoFORM FORM) {
-        GestaoDTO DTO = new GestaoDTO();
-        Gestao gestao = FORM.toFORM(gestaoR);
-        return DTO.toDTO(gestao);
-    }
-
-    @GetMapping("/op/{mes}")
-    @ApiOperation(value="Busca por mês respectiva à operações")
+    @GetMapping("/relatorio/op/{mes}")
+    @ApiOperation(value = "Buscar relatórios apartir do mês!")
     public ResponseEntity<?> FindRelatorioOpByMes(@PathVariable("mes") Long mes) {
         List<RelatorioOperacao> listaRelatorioOperacao = relatorioOpR.findAllByMes(mes);
         if (listaRelatorioOperacao.isEmpty()) {
@@ -83,8 +79,29 @@ public class GestaoController {
         return ResponseEntity.status(HttpStatus.FOUND).body(listaRelatorioOperacao);
     }
 
-    @GetMapping("/op/create/{mes}")
-    @ApiOperation(value="Busca por relatório")
+    @PostMapping("/despesa")
+    @ApiOperation(value = "Cadastrar uma despesa")
+    public GestaoDTO Add(@RequestBody GestaoFORM FORM) {
+        GestaoDTO DTO = new GestaoDTO();
+        Gestao gestao = FORM.toFORM(gestaoR, enumS);
+        return DTO.toDTO(gestao);
+    }
+
+    @PostMapping("/relatorio/base/{mes}")
+    @ApiOperation(value = "Gerar Relatório base pelo mês")
+    public ResponseEntity<?> Total(@PathVariable("mes") Long mes) {
+        RelatorioBruto relatorio = new RelatorioBruto();
+        Double totalSoma = 0.0;
+        for (int tipo = 0; tipo < TipoEnum.values().length; tipo++) {
+            totalSoma += calc.gerarBruto(gestaoR, tipo, mes, relatorio);
+        }
+        relatorio.setTotal(totalSoma);
+        relatorioR.save(relatorio);
+        return ResponseEntity.ok().body(relatorio);
+    }
+
+    @PostMapping("/relatorio/op/{mes}")
+    @ApiOperation(value = "Gerar relatórios automático de todas as operações pelo mês!")
     public ResponseEntity<?> CreatebyOperacao(@PathVariable("mes") Long mes) {
 
         if (mes <= 12 && mes != 0) {

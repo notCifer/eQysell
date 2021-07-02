@@ -45,7 +45,7 @@ public class SaneparPrivativaFORM {
     public SaneparPrivativa ToFORM(SaneparPrivativaRepository SaneparPR, EnumService opEnum ){
         Double consumo = fechamento - inicial;
         Double valorTotal = consumo * 17.11 ;
-        TipoEnum Tipo = opEnum.findSaneparP(idEnum);
+        TipoEnum Tipo = opEnum.findTipo(idEnum);
         SaneparPrivativa saneparPrivativa = new SaneparPrivativa(Tipo, inicial, fechamento, consumo,valorTotal);
         SaneparPR.save(saneparPrivativa);
         return saneparPrivativa;
