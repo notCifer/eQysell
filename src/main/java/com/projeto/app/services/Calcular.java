@@ -2,7 +2,9 @@ package com.projeto.app.services;
 
 import java.time.LocalDate;
 import java.util.List;
-import com.projeto.app.configs.services.EmailService;
+
+import javax.transaction.Transactional;
+
 import com.projeto.app.models.Abl;
 import com.projeto.app.models.Atividade;
 import com.projeto.app.models.Gestao;
@@ -26,6 +28,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@Transactional
 public class Calcular {
 
     @Autowired
@@ -105,7 +108,7 @@ public class Calcular {
     }
 
     public List<RelatorioOperacao> gerarByOperacao(RelatorioBruto relatorio, RelatorioOperacaoRepository relatorioOpR,
-            OperacaoRepository operacaoR, Long mes, EmailService email) {
+            OperacaoRepository operacaoR, Long mes) {
 
         Double totalCRD = 0.0;
 
@@ -187,11 +190,6 @@ public class Calcular {
             relatorioOP.setTotal(totalSoma);
             relatorioOP.setData(mesDate);
             relatorioOpR.save(relatorioOP);
-            String relatorioString = relatorioOP.toString();
-            String relatorioMes = relatorioOP.getData().toString();
-            String realtorioOperacao = operacao.getNome();
-            email.enviarEmail("eqysselproj@gmail.com", relatorioString,
-                    "Relatorio do mês " + relatorioMes + " Operação :" + realtorioOperacao);
         }
         return relatorioOpR.findAll();
     }
@@ -224,6 +222,7 @@ public class Calcular {
         return porcetagem;
 
     }
+
 
 }
 
