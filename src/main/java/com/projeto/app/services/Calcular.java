@@ -2,9 +2,7 @@ package com.projeto.app.services;
 
 import java.time.LocalDate;
 import java.util.List;
-
 import javax.transaction.Transactional;
-
 import com.projeto.app.models.Abl;
 import com.projeto.app.models.Atividade;
 import com.projeto.app.models.Gestao;
