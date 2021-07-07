@@ -67,20 +67,19 @@ public class LocatarioController {
 
 
     @PutMapping
-    @ApiOperation(value="Alterar Locatário")
+    @ApiOperation(value="Alterar Locatário pelo cpf")
     public ResponseEntity<?> Alterar(@RequestBody @Valid LocatarioFORM form){  
         Optional<Locatario> findByCpf = LocatarioR.findByCpf(form.getCpf());
         if (findByCpf.isPresent()) {
             Locatario locatario = findByCpf.get();
             locatario.setNome(form.getNome());
-            locatario.setCpf(form.getCpf());
             locatario.setEmail(form.getEmail());
             locatario.setTelefone(form.getTelefone());
             locatario.setEndereco(form.getEndereco());
             LocatarioR.save(locatario);
             return ResponseEntity.status(HttpStatus.OK).body(locatario);
         }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         
     }
 

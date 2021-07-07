@@ -30,7 +30,7 @@ import io.swagger.annotations.ApiOperation;
 @Api(description = "Relatórios para cada Operação",tags = { "Relatórios de Operações" })
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/relatorio/op")
+@RequestMapping("/relatorio")
 public class RelatorioOpController {
 
     @Autowired

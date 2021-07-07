@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -62,6 +63,26 @@ public class PessoaController {
         }
 
     }
+
+    @PutMapping
+    @ApiOperation(value = "Alterar pessoa pelo cpf")
+    public ResponseEntity<?> alterarOperacao(@RequestBody @Valid PessoaFORM FORM){
+        Optional<Pessoa> findByCpf = pessoaR.findByCpf(FORM.getCpf());
+        if (findByCpf.isPresent()) {
+            Pessoa pessoa = findByCpf.get();
+            pessoa.setCep(FORM.getCep());
+            pessoa.setComplemento(FORM.getComplemento());
+            pessoa.setCpf(FORM.getCpf());
+            pessoa.setEndereco(FORM.getEndereco());
+            pessoa.setFoto(FORM.getFoto());
+            pessoa.setNumero(FORM.getNumero());
+            pessoa.setTelefone(FORM.getTelefone());
+            pessoa.setUsuario(usuarioR.getById(FORM.getId_usuario()));
+            pessoaR.save(pessoa);
+            return ResponseEntity.status(HttpStatus.OK).build();
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    } 
 
     @DeleteMapping("/{id}")
     @ApiOperation(value = "Deleta pessoa pelo ID")

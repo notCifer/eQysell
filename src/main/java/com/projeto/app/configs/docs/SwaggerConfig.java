@@ -45,7 +45,7 @@ public class SwaggerConfig {
     }
 
     private ApiInfo metaInfo() {
-        ApiInfo apiInfo = new ApiInfo("eQysell - Compasso Uol", "Pensando em agilidade na sua relação com o cliente",
+        ApiInfo apiInfo = new ApiInfo("eQysell - Compasso Uol", "Ever-more to eQysell! ",
                 "Versão Alpha", "Terms",
                 new Contact("Desenvolvedores",
                         "https://www.linkedin.com/feed/update/urn:li:activity:6811671818735374337/", null),

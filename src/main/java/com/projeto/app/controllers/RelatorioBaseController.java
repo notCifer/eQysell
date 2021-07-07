@@ -18,10 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-@Api(description = "Relatórios para base de calculo",tags = { "Relatório Base" })
+@Api(description = "Controle da base de calculo",tags = { "Base de Calculo" })
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/relatorio/base")
+@RequestMapping("/calculo/base")
 public class RelatorioBaseController {
 
     @Autowired
@@ -34,17 +34,17 @@ public class RelatorioBaseController {
     public GestaoRepository gestaoR;
 
     @GetMapping("/{mes}")
-    @ApiOperation(value = "Buscar relatório base apartir do mês!")
+    @ApiOperation(value = "Buscar base apartir do mês!")
     public ResponseEntity<?> FindRelatorioBaseByMes(@PathVariable("mes") Long mes) {
         RelatorioBruto relatorio = relatorioR.findByMes(mes);
         if (relatorio == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Lista de Relatórios por operação esta vazia");
         }
-        return ResponseEntity.status(HttpStatus.FOUND).body(relatorio);
+        return ResponseEntity.status(HttpStatus.OK).body(relatorio);
     }
 
     @DeleteMapping("/{mes}")
-    @ApiOperation(value = "Deletar relatório base pelo mês")
+    @ApiOperation(value = "Deletar base pelo mês")
     public ResponseEntity<?> deletarRelatorioBase(@PathVariable("mes") Long mes) {
         RelatorioBruto findByMes = relatorioR.findByMes(mes);
         if (findByMes != null) {
@@ -55,7 +55,7 @@ public class RelatorioBaseController {
     }
 
     @PostMapping("/{mes}")
-    @ApiOperation(value = "Gerar Relatório base pelo mês")
+    @ApiOperation(value = "Gerar base pelo mês")
     public ResponseEntity<?> Total(@PathVariable("mes") Long mes) {
         RelatorioBruto findByMes = relatorioR.findByMes(mes);
         if (findByMes == null) {

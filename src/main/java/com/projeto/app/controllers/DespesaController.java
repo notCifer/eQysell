@@ -53,19 +53,20 @@ public class DespesaController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
-    @PutMapping
-    @ApiOperation(value = "Deletar despesa pela descrição")
-    public ResponseEntity<?> alterarDepesa(@RequestBody @Valid GestaoFORM FORM) {
-        Optional<Gestao> findByDescricao = gestaoR.findByDescricao(FORM.getDescricao());
-        if (findByDescricao.isPresent()) {
-            Gestao gestao = findByDescricao.get();
+    @PutMapping("/{id}")
+    @ApiOperation(value = "Alterar despesa pela descrição")
+    public ResponseEntity<?> alterarDepesa(@PathVariable Long id,@RequestBody @Valid GestaoFORM FORM) {
+        Optional<Gestao> findById = gestaoR.findById(id);
+        if (findById.isPresent()) {
+            Gestao gestao = findById.get();
+            gestao.setDescricao(FORM.getDescricao());
             gestao.setDataCreate(LocalDate.now());
             gestao.setTipo(enumS.findTipo(FORM.getidTipo()));
             gestao.setValor(FORM.getValor());
             gestaoR.save(gestao);
             return ResponseEntity.status(HttpStatus.OK).build();
         }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
     @PostMapping

@@ -70,12 +70,12 @@ public class OperacaoController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Operação não encontrada");
     }
     
-    @PutMapping
-    @ApiOperation(value = "Alterar Operacao")
-    public ResponseEntity<?> alterarOperacao(@RequestBody @Valid OperacaoFORM FORM){
-        Optional<Operacao> findByNome = operacaoR.findByNome(FORM.getNome());
-        if (findByNome.isPresent()) {
-            Operacao operacao = findByNome.get();
+    @PutMapping("/{id}")
+    @ApiOperation(value = "Alterar Operacao pelo id")
+    public ResponseEntity<?> alterarOperacao(@PathVariable Long id,@RequestBody @Valid OperacaoFORM FORM){
+        Optional<Operacao> findById = operacaoR.findById(id);
+        if (findById.isPresent()) {
+            Operacao operacao = findById.get();
             operacao.setCdr(FORM.toAlter(operacaoR, enumS, calc, operacao,FORM.getAbl()));
             operacao.setCnpj(FORM.getCnpj());
             operacao.setRazaosocial(FORM.getRazaosocial());
@@ -83,7 +83,7 @@ public class OperacaoController {
             operacaoR.save(operacao);
             return ResponseEntity.status(HttpStatus.OK).build();
         }
-        return ResponseEntity.status(HttpStatus.BAD_GATEWAY).build();
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
     @PostMapping
