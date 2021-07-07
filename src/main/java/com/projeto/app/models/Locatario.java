@@ -1,5 +1,6 @@
 package com.projeto.app.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,6 +14,7 @@ public class Locatario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
+    @Column(unique = true)
     private Long cpf;
     private String endereco;
     private String email;

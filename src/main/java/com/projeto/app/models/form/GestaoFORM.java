@@ -1,6 +1,8 @@
 package com.projeto.app.models.form;
 
 import java.time.LocalDate;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import com.projeto.app.models.Gestao;
 import com.projeto.app.models.gestao.TipoEnum;
 import com.projeto.app.repositories.GestaoRepository;
@@ -8,8 +10,11 @@ import com.projeto.app.services.EnumService;
 
 public class GestaoFORM {
 
+    @NotBlank
     private String descricao;
+    @NotNull
     private Double valor;
+    @NotNull
     private Long idTipo;
 
     public String getDescricao() {

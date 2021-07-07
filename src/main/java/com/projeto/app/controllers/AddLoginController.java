@@ -24,7 +24,7 @@ import io.swagger.annotations.ApiOperation;
 
 @RequestMapping("/user")
 @RestController
-@Api(description = "(PERMITIDO) Funções de usuário", tags = { "Usuário" })
+@Api(description = "(PERMITIDO) Controle de usuários", tags = { "Login" })
 public class AddLoginController {
 
     @Autowired

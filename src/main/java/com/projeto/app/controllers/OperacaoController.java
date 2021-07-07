@@ -20,14 +20,14 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import io.swagger.annotations.ApiOperation;
 
-@Api(description = "Busque e Cadastre sua Operação", tags = { "Operação" })
+@Api(description = "Controle de operações", tags = { "Operação" })
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/operacao")
 public class OperacaoController {
 
     @Autowired
-    private OperacaoRepository OR;
+    private OperacaoRepository operacaoR;
 
     @Autowired
     private Calcular calc;
@@ -35,10 +35,11 @@ public class OperacaoController {
     @Autowired
     private EnumService enumS;
 
-    @ApiOperation(value = "Método de Listagem Completa")
+    
     @GetMapping
+    @ApiOperation(value = "Lista todas Operações")
     public ResponseEntity<?> FindAll() {
-        List<Operacao> findList = OR.findAll();
+        List<Operacao> findList = operacaoR.findAll();
         if (findList.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Lista Vazia");
         }
@@ -50,7 +51,7 @@ public class OperacaoController {
     @ApiOperation(value = "Busca de Operação por Id")
     public ResponseEntity<?> findOneOperacao(@PathVariable long id) {
         try {
-            Operacao o = OR.getById(id);
+            Operacao o = operacaoR.getById(id);
             OperacaoDTO dto = new OperacaoDTO();
             return ResponseEntity.ok().body(dto.toDTO(o));
         } catch (EntityNotFoundException x) {
@@ -61,19 +62,35 @@ public class OperacaoController {
     @DeleteMapping("/{id}")
     @ApiOperation(value = "Delete")
     public ResponseEntity<?> delete(@PathVariable Long id) {
-        Optional<Operacao> optional = OR.findById(id);
+        Optional<Operacao> optional = operacaoR.findById(id);
         if (optional.isPresent()) {
-            OR.deleteById(id);
+            operacaoR.deleteById(id);
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Operação não encontrada");
     }
+    
+    @PutMapping
+    @ApiOperation(value = "Alterar Operacao")
+    public ResponseEntity<?> alterarOperacao(@RequestBody @Valid OperacaoFORM FORM){
+        Optional<Operacao> findByNome = operacaoR.findByNome(FORM.getNome());
+        if (findByNome.isPresent()) {
+            Operacao operacao = findByNome.get();
+            operacao.setCdr(FORM.toAlter(operacaoR, enumS, calc, operacao,FORM.getAbl()));
+            operacao.setCnpj(FORM.getCnpj());
+            operacao.setRazaosocial(FORM.getRazaosocial());
+            operacao.setResponse(FORM.getResponse());
+            operacaoR.save(operacao);
+            return ResponseEntity.status(HttpStatus.OK).build();
+        }
+        return ResponseEntity.status(HttpStatus.BAD_GATEWAY).build();
+    }
 
     @PostMapping
     @ApiOperation(value = "Cadastro de Operações")
-    public ResponseEntity<?> Add(@RequestBody @Valid OperacaoFORM OF, UriComponentsBuilder uri) {
+    public ResponseEntity<?> Add(@RequestBody @Valid OperacaoFORM FORM, UriComponentsBuilder uri) {
         try {
-            Operacao o = OF.toFORM(OR, enumS, calc);
+            Operacao o = FORM.toFORM(operacaoR, enumS, calc);
             URI u = uri.path("/operacao/{id}").buildAndExpand(o.getId()).toUri();
             return ResponseEntity.created(u).body(new OperacaoDTO().toDTO(o));
         } catch (DataIntegrityViolationException SQL) {
