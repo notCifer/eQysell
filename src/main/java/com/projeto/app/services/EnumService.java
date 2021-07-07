@@ -3,7 +3,7 @@ package com.projeto.app.services;
 import com.projeto.app.models.gestao.AtividadeEnum;
 import com.projeto.app.models.gestao.LocalizacaoEnum;
 import com.projeto.app.models.gestao.PisoEnum;
-
+import com.projeto.app.models.gestao.TipoEnum;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -34,6 +34,17 @@ public class EnumService {
         for (LocalizacaoEnum localizacaoEnum : list) {
             if (id == localizacaoEnum.getId()) {
                 return localizacaoEnum;
+            }
+        }
+
+        return null;
+    }
+
+    public TipoEnum findTipo(Long id) {
+        TipoEnum[] list = TipoEnum.values();
+        for (TipoEnum tipoEnum : list) {
+            if (id == tipoEnum.getId()) {
+                return tipoEnum;
             }
         }
         return null;

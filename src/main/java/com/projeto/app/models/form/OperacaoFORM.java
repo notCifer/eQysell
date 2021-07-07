@@ -95,17 +95,29 @@ public class OperacaoFORM {
 
     /* ___________________________TO FORM___________________________ */
 
-    public Operacao toFORM(OperacaoRepository operacaoR, Calcular calc, EnumService enumS) {
+    public Operacao toFORM(OperacaoRepository operacaoR, EnumService enumS, Calcular calc) {
         Double totalCRD = 1.0;
         LocalizacaoEnum localizaEnum = enumS.findLocaliza(localiza);
         PisoEnum pisoEnum = enumS.findPiso(piso);
         AtividadeEnum atividadeEnum = enumS.findAtividade(atividade);
-        
+
         Double calcCRD = calc.geraCRD(abl, atividadeEnum, localizaEnum, pisoEnum);
         Double calculo = calcCRD * totalCRD;
         Double resultado = calculo * abl;
         Operacao operacao = new Operacao(nome, razaosocial, response, cnpj, resultado);
         operacaoR.save(operacao);
         return operacao;
+    }
+
+    public Double toAlter(OperacaoRepository operacaoR, EnumService enumS, Calcular calc, Operacao operacao, Double abls) {
+        Double totalCRD = 1.0;
+        LocalizacaoEnum localizaEnum = enumS.findLocaliza(localiza);
+        PisoEnum pisoEnum = enumS.findPiso(piso);
+        AtividadeEnum atividadeEnum = enumS.findAtividade(atividade);
+        
+        Double calcCRD = calc.geraCRD(abls, atividadeEnum, localizaEnum, pisoEnum);
+        Double calculo = calcCRD * totalCRD;
+        Double resultado = calculo * abls;
+        return resultado;
     }
 }

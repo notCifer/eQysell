@@ -3,7 +3,6 @@ package com.projeto.app.models.dto;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import com.projeto.app.models.Gestao;
 import com.projeto.app.models.gestao.TipoEnum;
 

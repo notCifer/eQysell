@@ -9,18 +9,16 @@ import com.projeto.app.models.Locatario;
 import com.projeto.app.models.dto.LocatarioDTO;
 import com.projeto.app.models.form.LocatarioFORM;
 import com.projeto.app.repositories.LocatarioRepository;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
+@Api(description = "Controle de locatários",tags = { "Locatário" })
+@CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/locatario")
 public class LocatarioController {
@@ -28,7 +26,10 @@ public class LocatarioController {
     @Autowired
     private LocatarioRepository LocatarioR;
 
+    //_____Métodos_____//
+
     /* __________LISTAR LOCÁTARIOS__________ */
+    @ApiOperation(value="Lista todos locatários cadastrados.")
     @GetMapping
     public ResponseEntity<?> FindAll() {
         List<Locatario> locatarios = LocatarioR.findAll();
@@ -41,6 +42,7 @@ public class LocatarioController {
     }
 
     @GetMapping("/{id}")
+    @ApiOperation(value="Busca por ID")
     public ResponseEntity<?> FindByID(@PathVariable Long id) {
 
         try {
@@ -53,6 +55,7 @@ public class LocatarioController {
     }
 
     @DeleteMapping("/{id}")
+    @ApiOperation(value="Deletar Locatário")
     public ResponseEntity<?> Delete(@PathVariable Long id) {
         Optional<Locatario> locatario = LocatarioR.findById(id);
         if (locatario.isPresent()) {
@@ -62,8 +65,27 @@ public class LocatarioController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Locatario não encontrado");
     }
 
+
+    @PutMapping
+    @ApiOperation(value="Alterar Locatário pelo cpf")
+    public ResponseEntity<?> Alterar(@RequestBody @Valid LocatarioFORM form){  
+        Optional<Locatario> findByCpf = LocatarioR.findByCpf(form.getCpf());
+        if (findByCpf.isPresent()) {
+            Locatario locatario = findByCpf.get();
+            locatario.setNome(form.getNome());
+            locatario.setEmail(form.getEmail());
+            locatario.setTelefone(form.getTelefone());
+            locatario.setEndereco(form.getEndereco());
+            LocatarioR.save(locatario);
+            return ResponseEntity.status(HttpStatus.OK).body(locatario);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        
+    }
+
     /* __________POSTAR LOCATARIOS__________ */
     @PostMapping
+    @ApiOperation(value="Cadastrar Locatário")
     public ResponseEntity<LocatarioDTO> Add(@RequestBody @Valid LocatarioFORM form, UriComponentsBuilder UriBuilder) {
         Locatario locatario = form.toFORM(LocatarioR);
         LocatarioDTO DTO = new LocatarioDTO();
