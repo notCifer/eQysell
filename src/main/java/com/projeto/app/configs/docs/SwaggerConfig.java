@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import com.google.common.base.Predicates;
 import com.projeto.app.models.Usuario;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ParameterBuilder;
@@ -46,7 +45,7 @@ public class SwaggerConfig {
     }
 
     private ApiInfo metaInfo() {
-        ApiInfo apiInfo = new ApiInfo("eQysell - Compasso Uol", "Pensando em agilidade na sua relação com o cliente",
+        ApiInfo apiInfo = new ApiInfo("eQysell - Compasso Uol", "Ever-more to eQysell! ",
                 "Versão Alpha", "Terms",
                 new Contact("Desenvolvedores",
                         "https://www.linkedin.com/feed/update/urn:li:activity:6811671818735374337/", null),

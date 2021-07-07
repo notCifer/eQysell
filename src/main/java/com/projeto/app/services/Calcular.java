@@ -2,7 +2,7 @@ package com.projeto.app.services;
 
 import java.time.LocalDate;
 import java.util.List;
-import com.projeto.app.configs.services.EmailService;
+import javax.transaction.Transactional;
 import com.projeto.app.models.Abl;
 import com.projeto.app.models.Atividade;
 import com.projeto.app.models.Gestao;
@@ -26,6 +26,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@Transactional
 public class Calcular {
 
     @Autowired
@@ -48,7 +49,7 @@ public class Calcular {
         return total;
     }
 
-    public RelatorioBruto gerarBruto(GestaoRepository gestaoR, int tipo, Long mes, RelatorioBruto relatorio) {
+    public Double gerarBruto(GestaoRepository gestaoR, int tipo, Long mes, RelatorioBruto relatorio) {
         List<Gestao> lista = gestaoR.findAllBy(tipo, mes);
         Double total = calcularPeloTipo(lista);
         switch (tipo) {
@@ -101,11 +102,11 @@ public class Calcular {
         int Datames = mes.intValue();
         LocalDate mesDate = LocalDate.of(2001, Datames, 01);
         relatorio.setData(mesDate);
-        return relatorio;
+        return total;
     }
 
     public List<RelatorioOperacao> gerarByOperacao(RelatorioBruto relatorio, RelatorioOperacaoRepository relatorioOpR,
-            OperacaoRepository operacaoR, Long mes, EmailService email) {
+            OperacaoRepository operacaoR, Long mes) {
 
         Double totalCRD = 0.0;
 
@@ -114,67 +115,79 @@ public class Calcular {
             totalCRD += operacao.getCdr();
         }
         for (Operacao operacao : oList) {
+            Double totalSoma = 0.0;
             RelatorioOperacao relatorioOP = new RelatorioOperacao();
-
+            relatorioOP.setOperacao(operacao);
             Double resultado = ((operacao.getCdr() * 100) / totalCRD) / 100;
             for (int i = 0; i < TipoEnum.values().length; i++) {
                 switch (i) {
                     case 0:
                         relatorioOP.setSeg_limpeza(relatorio.getSeg_limpeza() * resultado);
+                        totalSoma += relatorioOP.getSeg_limpeza();
                         break;
                     case 1:
                         relatorioOP.setSanepar(relatorio.getSanepar() * resultado);
+                        totalSoma += relatorioOP.getSanepar();
                         break;
                     case 2:
                         relatorioOP.setMat_limpeza(relatorio.getMat_limpeza() * resultado);
+                        totalSoma += relatorioOP.getMat_limpeza();
                         break;
                     case 3:
                         relatorioOP.setMarketing(relatorio.getMarketing() * resultado);
+                        totalSoma += relatorioOP.getMarketing();
                         break;
                     case 4:
                         relatorioOP.setCont_praga(relatorio.getCont_praga() * resultado);
+                        totalSoma += relatorioOP.getCont_praga();
                         break;
                     case 5:
                         relatorioOP.setHonorario(relatorio.getHonorario() * resultado);
+                        totalSoma += relatorioOP.getHonorario();
                         break;
                     case 6:
                         relatorioOP.setEntreterimento(relatorio.getEntreterimento() * resultado);
+                        totalSoma += relatorioOP.getEntreterimento();
                         break;
                     case 7:
                         relatorioOP.setColeta_lixo(relatorio.getColeta_lixo() * resultado);
+                        totalSoma += relatorioOP.getColeta_lixo();
                         break;
                     case 8:
                         relatorioOP.setInternet(relatorio.getInternet() * resultado);
+                        totalSoma += relatorioOP.getInternet();
                         break;
                     case 9:
                         relatorioOP.setMat_expediente(relatorio.getMat_expediente() * resultado);
+                        totalSoma += relatorioOP.getMat_expediente();
                         break;
                     case 10:
                         relatorioOP.setManutencao(relatorio.getManutencao() * resultado);
+                        totalSoma += relatorioOP.getManutencao();
                         break;
                     case 11:
                         relatorioOP.setImpostos(relatorio.getImpostos() * resultado);
+                        totalSoma += relatorioOP.getImpostos();
                         break;
                     case 12:
                         relatorioOP.setLocacao(relatorio.getLocacao() * resultado);
+                        totalSoma += relatorioOP.getLocacao();
                         break;
                     case 13:
                         relatorioOP.setSeguro(relatorio.getSeguro() * resultado);
+                        totalSoma += relatorioOP.getSeguro();
                         break;
                     case 14:
                         relatorioOP.setCopel(relatorio.getCopel() * resultado);
+                        totalSoma += relatorioOP.getCopel();
                         break;
                 }
             }
             int Datames = mes.intValue();
             LocalDate mesDate = LocalDate.of(2021, Datames, 01);
+            relatorioOP.setTotal(totalSoma);
             relatorioOP.setData(mesDate);
             relatorioOpR.save(relatorioOP);
-            String relatorioString = relatorioOP.toString();
-            String relatorioMes = relatorioOP.getData().toString();
-            String realtorioOperacao = operacao.getNome();
-            email.enviarEmail("eqysselproj@gmail.com", relatorioString,
-                    "Relatorio do mês " + relatorioMes + " Operação :" + realtorioOperacao);
         }
         return relatorioOpR.findAll();
     }
@@ -207,6 +220,7 @@ public class Calcular {
         return porcetagem;
 
     }
+
 
 }
 

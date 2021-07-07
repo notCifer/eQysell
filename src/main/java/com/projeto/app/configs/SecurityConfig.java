@@ -43,6 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests().antMatchers(AUTH_WHITELIST).permitAll()
+        .antMatchers(HttpMethod.GET, "/").permitAll()
         .antMatchers(HttpMethod.GET, "/user").permitAll()
         .antMatchers(HttpMethod.GET, "/user/*").permitAll()
         .antMatchers(HttpMethod.DELETE, "/user/*").permitAll()

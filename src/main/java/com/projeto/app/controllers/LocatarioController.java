@@ -17,7 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-@Api(tags = { "Locatário" })
+@Api(description = "Controle de locatários",tags = { "Locatário" })
 @CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/locatario")
@@ -26,10 +26,10 @@ public class LocatarioController {
     @Autowired
     private LocatarioRepository LocatarioR;
 
-            //_____Métodos_____//
+    //_____Métodos_____//
 
     /* __________LISTAR LOCÁTARIOS__________ */
-    @ApiOperation(value="Listagem Completa de Locatários")
+    @ApiOperation(value="Lista todos locatários cadastrados.")
     @GetMapping
     public ResponseEntity<?> FindAll() {
         List<Locatario> locatarios = LocatarioR.findAll();
@@ -55,7 +55,7 @@ public class LocatarioController {
     }
 
     @DeleteMapping("/{id}")
-    @ApiOperation(value="Delete")
+    @ApiOperation(value="Deletar Locatário")
     public ResponseEntity<?> Delete(@PathVariable Long id) {
         Optional<Locatario> locatario = LocatarioR.findById(id);
         if (locatario.isPresent()) {
@@ -65,9 +65,27 @@ public class LocatarioController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Locatario não encontrado");
     }
 
+
+    @PutMapping
+    @ApiOperation(value="Alterar Locatário pelo cpf")
+    public ResponseEntity<?> Alterar(@RequestBody @Valid LocatarioFORM form){  
+        Optional<Locatario> findByCpf = LocatarioR.findByCpf(form.getCpf());
+        if (findByCpf.isPresent()) {
+            Locatario locatario = findByCpf.get();
+            locatario.setNome(form.getNome());
+            locatario.setEmail(form.getEmail());
+            locatario.setTelefone(form.getTelefone());
+            locatario.setEndereco(form.getEndereco());
+            LocatarioR.save(locatario);
+            return ResponseEntity.status(HttpStatus.OK).body(locatario);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        
+    }
+
     /* __________POSTAR LOCATARIOS__________ */
     @PostMapping
-    @ApiOperation(value="Postagem")
+    @ApiOperation(value="Cadastrar Locatário")
     public ResponseEntity<LocatarioDTO> Add(@RequestBody @Valid LocatarioFORM form, UriComponentsBuilder UriBuilder) {
         Locatario locatario = form.toFORM(LocatarioR);
         LocatarioDTO DTO = new LocatarioDTO();

@@ -108,4 +108,16 @@ public class OperacaoFORM {
         operacaoR.save(operacao);
         return operacao;
     }
+
+    public Double toAlter(OperacaoRepository operacaoR, EnumService enumS, Calcular calc, Operacao operacao, Double abls) {
+        Double totalCRD = 1.0;
+        LocalizacaoEnum localizaEnum = enumS.findLocaliza(localiza);
+        PisoEnum pisoEnum = enumS.findPiso(piso);
+        AtividadeEnum atividadeEnum = enumS.findAtividade(atividade);
+        
+        Double calcCRD = calc.geraCRD(abls, atividadeEnum, localizaEnum, pisoEnum);
+        Double calculo = calcCRD * totalCRD;
+        Double resultado = calculo * abls;
+        return resultado;
+    }
 }

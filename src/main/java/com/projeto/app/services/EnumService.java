@@ -36,21 +36,17 @@ public class EnumService {
                 return localizacaoEnum;
             }
         }
-        
-
 
         return null;
     }
 
-    public TipoEnum findSaneparP(Long id) {
+    public TipoEnum findTipo(Long id) {
         TipoEnum[] list = TipoEnum.values();
         for (TipoEnum tipoEnum : list) {
             if (id == tipoEnum.getId()) {
                 return tipoEnum;
             }
         }
-        
-
         return null;
     }
 
