@@ -86,10 +86,7 @@ public class BaseController {
 
     @PostMapping(value = "/atividade")
     @ApiOperation(value = "Cadastra uma atividade")
-    public Atividade addAtividade(@RequestBody @Valid AtividadeFORM FORM, Errors errors) {
-        if (errors.hasErrors()) {
-
-        }
+    public Atividade addAtividade(@RequestBody @Valid AtividadeFORM FORM) {
         Atividade atividade = FORM.toFORM(atividadeR,enumS);
         return atividade;
 
@@ -131,10 +128,7 @@ public class BaseController {
 
     @PostMapping(value = "/localizacao")
     @ApiOperation(value = "Cadastra uma localização")
-    public Localizacao addLocalizacao(@RequestBody @Valid LocalizacaoFORM FORM, Errors errors) {
-        if (errors.hasErrors()) {
-
-        }
+    public Localizacao addLocalizacao(@RequestBody @Valid LocalizacaoFORM FORM) {
         Localizacao localiza = FORM.toFORM(localizaR,enumS);
         return localiza;
     }
@@ -174,10 +168,7 @@ public class BaseController {
 
     @PostMapping(value = "/piso")
     @ApiOperation(value = "Cadastra um piso")
-    public Piso addLocalizacao(@RequestBody @Valid PisoFORM FORM, Errors errors) {
-        if (errors.hasErrors()) {
-
-        }
+    public Piso addLocalizacao(@RequestBody @Valid PisoFORM FORM) {
         Piso piso = FORM.toFORM(pisoR,enumS);
         return piso;
     }
@@ -217,10 +208,7 @@ public class BaseController {
 
     @PostMapping(value = "/abl")
     @ApiOperation(value = "Cadastra uma ABL")
-    public Abl addLocalizacao(@RequestBody @Valid AblFORM FORM, Errors errors) {
-        if (errors.hasErrors()) {
-
-        }
+    public Abl addLocalizacao(@RequestBody @Valid AblFORM FORM) {
         Abl abl = FORM.toFORM(ablR);
         return abl;
     }
