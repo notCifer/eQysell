@@ -18,12 +18,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@Api(description = "Controle de despesas",tags = { "Despesas" })
+@Api(description = "Controle de despesas", tags = { "Despesas" })
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/despesa")
 public class DespesaController {
-
 
     @Autowired
     public GestaoRepository gestaoR;
@@ -41,7 +40,6 @@ public class DespesaController {
         return DTO.toDTO(gList);
     }
 
-
     @DeleteMapping("/{id}")
     @ApiOperation(value = "Deletar despesa pelo id")
     public ResponseEntity<?> deletarDepesa(@PathVariable("id") Long id) {
@@ -55,7 +53,7 @@ public class DespesaController {
 
     @PutMapping("/{id}")
     @ApiOperation(value = "Alterar despesa pela descrição")
-    public ResponseEntity<?> alterarDepesa(@PathVariable Long id,@RequestBody @Valid GestaoFORM FORM) {
+    public ResponseEntity<?> alterarDepesa(@PathVariable Long id, @RequestBody @Valid GestaoFORM FORM) {
         Optional<Gestao> findById = gestaoR.findById(id);
         if (findById.isPresent()) {
             Gestao gestao = findById.get();
@@ -76,9 +74,5 @@ public class DespesaController {
         Gestao gestao = FORM.toFORM(gestaoR, enumS);
         return DTO.toDTO(gestao);
     }
-
-    
-
-  
 
 }
