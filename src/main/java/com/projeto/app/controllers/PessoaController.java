@@ -66,7 +66,7 @@ public class PessoaController {
 
     @PutMapping
     @ApiOperation(value = "Alterar pessoa pelo cpf")
-    public ResponseEntity<?> alterarOperacao(@RequestBody @Valid PessoaFORM FORM){
+    public ResponseEntity<?> alterarOperacao(@RequestBody @Valid PessoaFORM FORM) {
         Optional<Pessoa> findByCpf = pessoaR.findByCpf(FORM.getCpf());
         if (findByCpf.isPresent()) {
             Pessoa pessoa = findByCpf.get();
@@ -82,7 +82,7 @@ public class PessoaController {
             return ResponseEntity.status(HttpStatus.OK).build();
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-    } 
+    }
 
     @DeleteMapping("/{id}")
     @ApiOperation(value = "Deleta pessoa pelo ID")
